@@ -1,0 +1,84 @@
+<!-- Preloader -->
+<div class="preloader-wrap" *ngIf="false">
+    <div class="spinner"></div>
+</div>
+
+<!-- header-area start -->
+<header class="header-area">
+    <div class="header-top bg-2">
+        <div class="fluid-container">
+            <div class="row">
+                <div class="col-md-6 col-12">
+                    <div class="d-flex header-contact" style="padding: 20px;">
+                        <div class="logo">
+                            <a routerLink="/">
+                                <img alt="LibroRed" src="/images/logo.png">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-12">
+                    <div class="d-flex account_login-area justify-content-end" style="padding: 20px;">
+                        <!-- Navigation links for authenticated users -->
+                        <ng-container *ngIf="authService.isLogged()">
+                            <!-- Show My Account for non-admin users -->
+                            <div *ngIf="!authService.isAdmin()">
+                                <a routerLink="/account" class="btn btn-primary btn-nowrap">My Account</a>
+                            </div>
+                            <!-- Show Admin Panel for admin users -->
+                            <div *ngIf="authService.isAdmin()">
+                                <a routerLink="/admin" class="btn btn-primary btn-nowrap">Admin Panel</a>
+                            </div>
+                            <!-- Logout button for all authenticated users -->
+                            <div class="nav-item">
+                                <button class="btn btn-primary btn-nowrap" type="button" (click)="authService.logOut()">
+                                    Log Out
+                                </button>
+                            </div>
+                        </ng-container>
+
+                        <!-- Navigation links for non-authenticated users -->
+                        <ng-container *ngIf="!authService.isLogged()">
+                            <div><a routerLink="/login" class="btn btn-primary me-2">Login</a></div>
+                            <div><a routerLink="/register" class="btn btn-outline-primary">Register</a></div>
+                        </ng-container>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<!-- header-area end -->
+
+<div class="big-container">
+    <router-outlet></router-outlet>
+</div>
+
+<!-- Footer -->
+<div class="footer-area">
+    <div class="footer-top">
+        <div class="container" style="padding: 20px;">
+            <div class="footer-top-item">
+                <div class="row">
+                    <div class="col-lg-12 col-12">
+                        <div class="footer-top-text text-center">
+                            <a routerLink="/" class="btn btn-primary">HOME</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom bg-dark">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-8 col-sm-12">
+                    <div class="footer-content p-4">
+                        <p class="text-white">LibroRed is a student project</p>
+                        <p class="text-white">2025 URJC-DAW-EQUIPO 13</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

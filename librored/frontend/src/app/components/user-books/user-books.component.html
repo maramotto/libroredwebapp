@@ -1,0 +1,303 @@
+<div class="container-fluid mt-4">
+  <div class="row">
+    <div class="col-12">
+      <!-- Header -->
+      <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2><i class="bi bi-book"></i> My Books</h2>
+        <button type="button" class="btn btn-success" (click)="openCreateModal()">
+          <i class="bi bi-plus-circle"></i> Add New Book
+        </button>
+      </div>
+
+      <!-- Messages -->
+      <div *ngIf="errorMessage" class="alert alert-danger alert-dismissible fade show" role="alert">
+        {{ errorMessage }}
+        <button type="button" class="btn-close" (click)="clearMessages()"></button>
+      </div>
+
+      <div *ngIf="successMessage" class="alert alert-success alert-dismissible fade show" role="alert">
+        {{ successMessage }}
+        <button type="button" class="btn-close" (click)="clearMessages()"></button>
+      </div>
+
+      <!-- Books Table -->
+      <div class="card">
+        <div class="card-header">
+          <h5 class="mb-0">My Books ({{ totalItems }} total)</h5>
+        </div>
+        <div class="card-body">
+          <!-- Loading Spinner -->
+          <div *ngIf="loading || loadingUser" class="text-center p-4">
+            <div class="spinner-border" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </div>
+            <p class="mt-2">Loading books...</p>
+          </div>
+
+          <!-- Books Table -->
+          <div *ngIf="!loading && !loadingUser" class="table-responsive">
+            <table class="table table-striped table-hover">
+              <thead class="table-dark">
+                <tr>
+                  <th>Cover</th>
+                  <th>Title</th>
+                  <th>Author</th>
+                  <th>Genre</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let book of paginatedBooks">
+                  <td>
+                    <img [src]="getCoverImageUrl(book)"
+                         alt="{{ book.title }}"
+                         class="book-cover-thumbnail"
+                         style="width: 50px; height: 70px; object-fit: cover;"
+                         (error)="$event.target.src='https://localhost:8443/images/default_cover.jpg'">
+                  </td>
+                  <td style="max-width: 200px;">
+                    <strong>{{ book.title }}</strong>
+                    <br>
+                    <small class="text-muted">{{ book.description | slice:0:40 }}{{ book.description && book.description.length > 40 ? '...' : '' }}</small>
+                  </td>
+                  <td>{{ book.author }}</td>
+                  <td>
+                    <span class="badge bg-secondary">{{ book.genre.replace('_', ' ') }}</span>
+                  </td>
+                  <td style="min-width: 100px;">
+                    <div class="d-grid gap-1">
+                      <button type="button" class="btn btn-outline-primary btn-sm" (click)="openEditModal(book)" title="Edit">
+                        <i class="bi bi-pencil me-1"></i>Edit
+                      </button>
+                      <button type="button" class="btn btn-outline-danger btn-sm" (click)="openDeleteModal(book)" title="Delete">
+                        <i class="bi bi-trash me-1"></i>Delete
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+
+            <!-- No books message -->
+            <div *ngIf="books.length === 0" class="text-center p-4">
+              <i class="bi bi-book display-1 text-muted"></i>
+              <p class="text-muted mt-2">You haven't added any books yet. Create your first book!</p>
+            </div>
+          </div>
+
+          <!-- Pagination -->
+          <nav *ngIf="!loading && !loadingUser && totalPages > 1" aria-label="Books pagination">
+            <ul class="pagination justify-content-center">
+              <li class="page-item" [class.disabled]="isFirst">
+                <button class="page-link" (click)="previousPage()" [disabled]="isFirst">
+                  <i class="bi bi-chevron-left"></i> Previous
+                </button>
+              </li>
+
+              <li class="page-item"
+                  *ngFor="let pageNum of getPageNumbers()"
+                  [class.active]="pageNum === currentPage">
+                <button class="page-link" (click)="goToPage(pageNum)">
+                  {{ pageNum + 1 }}
+                </button>
+              </li>
+
+              <li class="page-item" [class.disabled]="isLast">
+                <button class="page-link" (click)="nextPage()" [disabled]="isLast">
+                  Next <i class="bi bi-chevron-right"></i>
+                </button>
+              </li>
+            </ul>
+          </nav>
+
+          <!-- Page info -->
+          <div *ngIf="!loading && !loadingUser && totalItems > 0" class="d-flex justify-content-between align-items-center mt-3">
+            <small class="text-muted">
+              Showing {{ (currentPage * pageSize) + 1 }} to {{ Math.min((currentPage + 1) * pageSize, totalItems) }} of {{ totalItems }} books
+            </small>
+            <small class="text-muted">
+              Page {{ currentPage + 1 }} of {{ totalPages }}
+            </small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CREATE BOOK MODAL -->
+<div class="modal" [class.show]="showCreateModal" [style.display]="showCreateModal ? 'block' : 'none'" tabindex="-1">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title"><i class="bi bi-plus-circle"></i> Add New Book</h5>
+        <button type="button" class="btn-close" (click)="closeCreateModal()"></button>
+      </div>
+      <div class="modal-body">
+        <form #createForm="ngForm">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="mb-3">
+                <label for="createTitle" class="form-label">Title *</label>
+                <input type="text" class="form-control" id="createTitle"
+                       [(ngModel)]="bookForm.title" name="title" required>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="mb-3">
+                <label for="createAuthor" class="form-label">Author *</label>
+                <input type="text" class="form-control" id="createAuthor"
+                       [(ngModel)]="bookForm.author" name="author" required>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6">
+              <div class="mb-3">
+                <label for="createGenre" class="form-label">Genre *</label>
+                <select class="form-select" id="createGenre"
+                        [(ngModel)]="bookForm.genre" name="genre" required>
+                  <option value="">Select a genre</option>
+                  <option *ngFor="let genre of genres" [value]="genre">{{ genre.replace('_', ' ') }}</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label for="createDescription" class="form-label">Description *</label>
+            <textarea class="form-control" id="createDescription" rows="3"
+                      [(ngModel)]="bookForm.description" name="description" required></textarea>
+          </div>
+
+          <div class="mb-3">
+            <label for="createCoverImage" class="form-label">Cover Image</label>
+            <input type="file" class="form-control" id="createCoverImage"
+                   accept="image/*" (change)="onFileSelected($event)">
+            <div class="form-text">Optional. Max file size: 5MB. Supported formats: JPG, PNG, GIF</div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="closeCreateModal()">Cancel</button>
+        <button type="button" class="btn btn-success" (click)="createBook()" [disabled]="loading">
+          <span *ngIf="loading" class="spinner-border spinner-border-sm me-2"></span>
+          Create Book
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal-backdrop" [class.show]="showCreateModal" *ngIf="showCreateModal"></div>
+
+<!-- EDIT BOOK MODAL -->
+<div class="modal" [class.show]="showEditModal" [style.display]="showEditModal ? 'block' : 'none'" tabindex="-1">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title"><i class="bi bi-pencil"></i> Edit Book</h5>
+        <button type="button" class="btn-close" (click)="closeEditModal()"></button>
+      </div>
+      <div class="modal-body">
+        <form #editForm="ngForm">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="mb-3">
+                <label for="editTitle" class="form-label">Title *</label>
+                <input type="text" class="form-control" id="editTitle"
+                       [(ngModel)]="bookForm.title" name="title" required>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="mb-3">
+                <label for="editAuthor" class="form-label">Author *</label>
+                <input type="text" class="form-control" id="editAuthor"
+                       [(ngModel)]="bookForm.author" name="author" required>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6">
+              <div class="mb-3">
+                <label for="editGenre" class="form-label">Genre *</label>
+                <select class="form-select" id="editGenre"
+                        [(ngModel)]="bookForm.genre" name="genre" required>
+                  <option value="">Select a genre</option>
+                  <option *ngFor="let genre of genres" [value]="genre">{{ genre.replace('_', ' ') }}</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label for="editDescription" class="form-label">Description *</label>
+            <textarea class="form-control" id="editDescription" rows="3"
+                      [(ngModel)]="bookForm.description" name="description" required></textarea>
+          </div>
+
+          <div class="mb-3">
+            <label for="editCoverImage" class="form-label">Cover Image</label>
+            <input type="file" class="form-control" id="editCoverImage"
+                   accept="image/*" (change)="onFileSelected($event)">
+            <div class="form-text">Optional. Max file size: 5MB. Leave empty to keep current image.</div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="closeEditModal()">Cancel</button>
+        <button type="button" class="btn btn-primary" (click)="updateBook()" [disabled]="loading">
+          <span *ngIf="loading" class="spinner-border spinner-border-sm me-2"></span>
+          Update Book
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal-backdrop" [class.show]="showEditModal" *ngIf="showEditModal"></div>
+
+<!-- DELETE BOOK MODAL -->
+<div class="modal" [class.show]="showDeleteModal" [style.display]="showDeleteModal ? 'block' : 'none'" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title"><i class="bi bi-exclamation-triangle text-danger"></i> Delete Book</h5>
+        <button type="button" class="btn-close" (click)="closeDeleteModal()"></button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to delete this book?</p>
+        <div class="card">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-3">
+                <img [src]="getCoverImageUrl(bookForm)"
+                     alt="{{ bookForm.title }}"
+                     class="img-fluid"
+                     style="max-height: 100px; object-fit: cover;"
+                     (error)="$event.target.src='https://localhost:8443/images/default_cover.jpg'">
+              </div>
+              <div class="col-9">
+                <h6>{{ bookForm.title }}</h6>
+                <p class="mb-1"><strong>Author:</strong> {{ bookForm.author }}</p>
+                <p class="mb-0"><strong>Genre:</strong> {{ bookForm.genre?.replace('_', ' ') }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="alert alert-warning mt-3">
+          <i class="bi bi-exclamation-triangle"></i>
+          <strong>Warning:</strong> This action cannot be undone. The book will be permanently deleted.
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="closeDeleteModal()">Cancel</button>
+        <button type="button" class="btn btn-danger" (click)="deleteBook()" [disabled]="loading">
+          <span *ngIf="loading" class="spinner-border spinner-border-sm me-2"></span>
+          Delete Book
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal-backdrop" [class.show]="showDeleteModal" *ngIf="showDeleteModal"></div>

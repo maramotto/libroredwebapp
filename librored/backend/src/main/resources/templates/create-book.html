@@ -1,0 +1,77 @@
+{{>header}}
+
+<div class="container mt-5">
+    <h2 class="text-center">Create Book</h2>
+    <form action="/books/create" method="post" enctype="multipart/form-data">
+        <input type="hidden" name="_csrf" value="{{_csrf.token}}">
+        <div class="form-group">
+            <label>Title</label>
+            <input type="text" name="title" class="form-control" required>
+        </div>
+
+        <div class="form-group">
+            <label>Author</label>
+            <input type="text" name="author" class="form-control" required>
+        </div>
+
+        <!-- ✅ Genre Dropdown -->
+        <div class="form-group">
+            <label>Genre</label>
+            <select name="genre" class="form-control" required>
+                <option value="" disabled selected>-- Select a Genre --</option>
+                {{#genreList}}
+                <option value="{{this}}">{{this}}</option>
+                {{/genreList}}
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Description</label>
+            <textarea name="description" class="form-control" rows="3" required></textarea>
+        </div>
+
+        <!-- ✅ Cover Picture Upload -->
+        <div class="form-group">
+            <label>Cover Picture</label>
+            <input type="file" id="coverUpload" name="coverImage" class="form-control">
+            <button type="button" id="uploadBtn" class="btn btn-secondary mt-2">Upload from Local</button>
+        </div>
+
+        <!-- ✅ Owner Selection (Only for Admins) -->
+        {{#isAdmin}}
+        <div class="form-group">
+            <label>Owner</label>
+            <select name="ownerId" class="form-control" required>
+                <option value="" disabled selected>-- Select an Owner --</option>
+                {{#users}}
+                <option value="{{id}}">{{username}}</option>
+                {{/users}}
+            </select>
+        </div>
+        {{/isAdmin}}
+
+        <!-- ✅ Hidden Owner Field (For Users) -->
+        {{^isAdmin}}
+        <input type="hidden" name="ownerId" value="{{userId}}">
+        {{/isAdmin}}
+
+
+        <button type="submit" class="btn btn-success">Create Book</button>
+        <a href="/books" class="btn btn-secondary ms-2">Back to My Books</a>
+    </form>
+</div>
+
+<script>
+    document.getElementById('uploadBtn').addEventListener('click', function () {
+        document.getElementById('coverUpload').click();
+    });
+
+    document.getElementById('coverUpload').addEventListener('change', function (event) {
+        const file = event.target.files[0];
+        if (file) {
+            alert("Selected file: " + file.name);
+        }
+    });
+</script>
+
+{{>footer}}

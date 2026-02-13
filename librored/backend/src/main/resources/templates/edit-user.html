@@ -1,0 +1,43 @@
+{{> header}}
+
+<div class="container mt-5">
+    <h2 class="text-center">Edit User</h2>
+    <form action="/users/edit/{{user.id}}" method="post">
+        <input type="hidden" name="_csrf" value="{{_csrf.token}}">
+
+        <div class="form-group">
+            <label>Username</label>
+            <p>Current: <strong>{{user.username}}</strong></p>
+            <input type="text" name="username" class="form-control" value="{{user.username}}" required>
+        </div>
+
+
+        <div class="form-group">
+            <label>Email</label>
+            <p>Current: <strong>{{user.email}}</strong></p>
+            <input type="email" name="email" class="form-control" value="{{user.email}}" required>
+        </div>
+
+        <div class="form-group">
+            <label>Role</label>
+            <p>Current: <strong>{{user.role}}</strong></p>
+            <select name="role" class="form-control" required>
+                <option value="" disabled selected>-- Select Role --</option>
+                <option value="ROLE_USER" {{#isUserRole}}selected{{/isUserRole}}>User</option>
+                <option value="ROLE_ADMIN" {{#isAdminRole}}selected{{/isAdminRole}}>Admin</option>
+            </select>
+        </div>
+
+
+        <div class="form-group">
+            <label>New Password</label>
+            <input type="password" name="password" class="form-control" placeholder="Enter a new password">
+            <small class="text-muted">Leave blank to keep the current password.</small>
+        </div>
+
+        <button type="submit" class="btn btn-success mt-3">Update User</button>
+        <a href="/users" class="btn btn-secondary mt-3">Cancel</a>
+    </form>
+</div>
+
+{{> footer}}

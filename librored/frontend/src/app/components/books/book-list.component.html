@@ -1,0 +1,61 @@
+<div class="container mt-5">
+    <h2 class="text-center">My Books</h2>
+
+    <!-- Create Book Button -->
+    <a routerLink="/books/new" class="btn btn-primary mb-3">Create Book</a>
+
+    <!-- Loading Spinner -->
+    <div *ngIf="loading" class="text-center">
+        <div class="spinner-border" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+        <p>Loading books...</p>
+    </div>
+
+    <!-- Error Message -->
+    <div *ngIf="errorMessage" class="alert alert-danger" role="alert">
+        {{ errorMessage }}
+        <button type="button" class="btn btn-link" (click)="loadBooks()">Try Again</button>
+    </div>
+
+    <!-- Books List -->
+    <div *ngIf="!loading && !errorMessage" class="row">
+        <div *ngFor="let book of books" class="col-md-4 mb-4">
+            <div class="card shadow-sm">
+                <img [src]="getImageUrl(book)" class="card-img-top" [alt]="book.title" 
+                     style="height: 200px; object-fit: cover; background-color: #f8f9fa;">
+                
+                <div class="card-body">
+                    <h5 class="card-title">{{ book.title }}</h5>
+                    <p class="card-text">{{ book.description }}</p>
+
+                    <!-- Shops -->
+                    <div *ngIf="book.shops && book.shops.length > 0">
+                        <p class="card-text"><strong>Available in:</strong></p>
+                        <ul class="list-unstyled">
+                            <li *ngFor="let shop of book.shops" class="small text-muted">
+                                {{ shop.name }} - {{ shop.address }}
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="d-flex justify-content-between">
+                        <a [routerLink]="['/books', book.id]" class="btn btn-info btn-sm">View</a>
+                        <button type="button" class="btn btn-warning btn-sm" (click)="editBook(book)">Edit</button>
+                        <button type="button" class="btn btn-danger btn-sm" (click)="deleteBook(book)">Delete</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- No Books Message -->
+        <div *ngIf="books.length === 0" class="col-12">
+            <div class="alert alert-info text-center">
+                <h5>No Books Found</h5>
+                <p>You haven't added any books yet.</p>
+                <a routerLink="/books/new" class="btn btn-primary">Add Your First Book</a>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,58 @@
+<!-- Main Admin Panel Content -->
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+
+      <!-- Admin Panel Title -->
+      <div class="text-center mb-5">
+        <h1 class="display-5 text-dark">Admin Panel</h1>
+      </div>
+
+      <!-- Admin Action Buttons Grid -->
+      <div class="row g-4 mb-4">
+        <!-- Manage Users -->
+        <div class="col-md-4">
+          <button
+            class="btn btn-primary btn-lg w-100 py-3"
+            (click)="navigateToUserManagement()">
+            <i class="bi bi-people-fill me-2"></i>
+            Manage Users
+          </button>
+        </div>
+
+        <!-- Manage Books -->
+        <div class="col-md-4">
+          <button
+            class="btn btn-primary btn-lg w-100 py-3"
+            (click)="navigateToBookManagement()">
+            <i class="bi bi-book-fill me-2"></i>
+            Manage Books
+          </button>
+        </div>
+
+        <!-- Manage Loans -->
+        <div class="col-md-4">
+          <button
+            class="btn btn-primary btn-lg w-100 py-3"
+            (click)="navigateToLoanManagement()">
+            <i class="bi bi-clipboard-check-fill me-2"></i>
+            Manage Loans
+          </button>
+        </div>
+      </div>
+
+      <!-- Download Report Button -->
+      <div class="row justify-content-center">
+        <div class="col-md-6">
+          <button
+            class="btn btn-info btn-lg w-100 py-3 mb-3"
+            (click)="downloadReport()">
+            <i class="bi bi-download me-2"></i>
+            Download Report (PDF)
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

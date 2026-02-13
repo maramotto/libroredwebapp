@@ -1,0 +1,149 @@
+{{> header}}
+
+<div class="container mt-5">
+    <h2 class="text-center">Edit Loan</h2>
+
+    <!-- Loan Details (Read-Only) -->
+    <div class="card p-3 mb-3">
+        <h5>Loan Information</h5>
+        <p><strong>Book:</strong> {{loan.book.title}}</p>
+        <p><strong>Lender:</strong> {{loan.lender.username}}</p>
+        <p><strong>Borrower:</strong> {{loan.borrower.username}}</p>
+        <p><strong>Start Date:</strong> {{loan.startDate}}</p>
+        <p><strong>End Date:</strong> {{loanEndDate}}</p>
+        <p><strong>Status:</strong> {{loan.status}}</p>
+    </div>
+
+    <!-- Step 1: Buttons to choose what to change -->
+    <h5>Select Field to Edit:</h5>
+    <div class="btn-group mb-3">
+        <button type="button" class="btn btn-primary" onclick="showField('bookField')">Change Book</button>
+        <button type="button" class="btn btn-primary" onclick="showField('borrowerField')">Change Borrower</button>
+        <button type="button" class="btn btn-primary" onclick="showField('dateField')">Change Dates</button>
+        <button type="button" class="btn btn-primary" onclick="showField('statusField')">Change Status</button>
+    </div>
+
+    <!-- Step 2: Form fields that appear dynamically -->
+    <form action="/loans/edit/{{loan.id}}" method="post">
+        <input type="hidden" name="_csrf" value="{{_csrf.token}}">
+
+        <!-- Change Book -->
+        <div id="bookField" class="form-group d-none">
+            <label>New Book (Only Available Books from Lender)</label>
+            <select name="book.id" class="form-control">
+                {{#books}}
+                <option value="{{id}}" {{#loan.book}} {{#id}}{{#loan.book.id}}selected{{/loan.book.id}}{{/id}} {{/loan.book}}> {{title}}</option>
+                {{/books}}
+            </select>
+        </div>
+
+
+        <!-- Change Borrower -->
+        <div id="borrowerField" class="form-group d-none">
+            <label>New Borrower</label>
+            <select name="borrower.id" class="form-control">
+                {{#users}}
+                <option value="{{id}}" {{#loan.borrower}} {{#id}}{{#loan.borrower.id}}selected{{/loan.borrower.id}}{{/id}} {{/loan.borrower}}> {{username}} </option>
+                {{/users}}
+            </select>
+        </div>
+
+        <!-- Change Dates -->
+        <div id="dateField" class="form-group d-none">
+            <label>New Start Date</label>
+            <input type="date" name="startDate" id="editStartDate" class="form-control" value="{{loan.startDate}}">
+
+            <label>New End Date</label>
+            <input type="date" name="endDate" id="editEndDate" class="form-control" value="{{loanEndDate}}">
+        </div>
+
+        <!-- Change Status -->
+        <div id="statusField" class="form-group d-none">
+            <label>New Status</label>
+            <select name="status" class="form-control">
+                <option value="Active" {{#isStatusActive}}selected{{/isStatusActive}}>Active</option>
+                <option value="Completed" {{#isStatusCompleted}}selected{{/isStatusCompleted}}>Completed</option>
+            </select>
+        </div>
+
+
+
+        {{#error}}
+        <div class="alert alert-danger mt-3">{{error}}</div>
+        {{/error}}
+        
+        {{#message}}
+        <div class="alert alert-success mt-3">{{message}}</div>
+        {{/message}}
+
+        <button type="submit" class="btn btn-success mt-3">Update Loan</button>
+        <a href="/loans" class="btn btn-secondary mt-3">Cancel</a>
+    </form>
+</div>
+
+<script>
+    function showField(fieldId) {
+        console.log("🔍 Trying to show field: " + fieldId);
+        var field = document.getElementById(fieldId);
+        if (field) {
+            console.log("✅ Field found, displaying it.");
+            field.classList.remove('d-none');
+        } else {
+            console.error("❌ Field not found in the DOM!");
+        }
+    }
+
+    // Date validation for edit loan
+    document.addEventListener("DOMContentLoaded", function () {
+        const form = document.querySelector("form");
+        const startDateInput = document.getElementById("editStartDate");
+        const endDateInput = document.getElementById("editEndDate");
+
+        // Date validation on change
+        if (startDateInput) {
+            startDateInput.addEventListener("change", function() {
+                const startDate = new Date(this.value);
+                
+                // Update end date minimum
+                if (endDateInput) {
+                    endDateInput.min = this.value;
+                    
+                    // Check if end date needs to be updated
+                    if (endDateInput.value && new Date(endDateInput.value) <= startDate) {
+                        alert("End date must be after start date.");
+                        endDateInput.value = "";
+                    }
+                }
+            });
+        }
+
+        if (endDateInput) {
+            endDateInput.addEventListener("change", function() {
+                const endDate = new Date(this.value);
+                const startDate = startDateInput ? new Date(startDateInput.value) : null;
+
+                if (startDate && endDate <= startDate) {
+                    alert("End date must be after start date.");
+                    this.value = "";
+                }
+            });
+        }
+
+        // Form submission validation
+        form.addEventListener("submit", function(event) {
+            const startDate = startDateInput ? new Date(startDateInput.value) : null;
+            const endDate = endDateInput && endDateInput.value ? new Date(endDateInput.value) : null;
+
+            // Date validations only if dates are being changed
+            if (startDate && endDate && endDate <= startDate) {
+                event.preventDefault();
+                alert("End date must be after start date.");
+                return false;
+            }
+
+            return true;
+        });
+    });
+</script>
+
+{{> footer}}

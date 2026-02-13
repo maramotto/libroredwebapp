@@ -1,0 +1,72 @@
+.book-cover-thumbnail {
+  border-radius: 4px;
+  border: 1px solid #dee2e6;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.table td {
+  vertical-align: middle;
+}
+
+.modal-backdrop {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal.show {
+  display: block !important;
+}
+
+.pagination {
+  margin-bottom: 0;
+}
+
+.btn-group .btn {
+  margin-right: 0;
+}
+
+.card-header h5 {
+  color: #495057;
+  font-weight: 600;
+}
+
+.badge {
+  font-size: 0.875em;
+}
+
+.alert {
+  border: none;
+  border-radius: 8px;
+}
+
+.form-control:focus,
+.form-select:focus {
+  border-color: #86b7fe;
+  box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+}
+
+.modal-header {
+  border-bottom: 1px solid #dee2e6;
+  background-color: #f8f9fa;
+}
+
+.modal-footer {
+  border-top: 1px solid #dee2e6;
+  background-color: #f8f9fa;
+}
+
+.text-muted {
+  color: #6c757d !important;
+}
+
+.spinner-border-sm {
+  width: 1rem;
+  height: 1rem;
+}
+
+.book-cover-preview {
+  max-width: 100px;
+  max-height: 150px;
+  object-fit: cover;
+  border-radius: 4px;
+  border: 1px solid #dee2e6;
+}

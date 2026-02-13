@@ -1,0 +1,81 @@
+services:
+  # MySQL Database Service
+  mysql:
+    image: mysql:8.0
+    container_name: librored-mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword123
+      MYSQL_DATABASE: librored
+      MYSQL_USER: librored
+      MYSQL_PASSWORD: librored123
+    ports:
+      - "3307:3306"  # External port 3307 to avoid conflicts with local MySQL
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./docker/mysql/init:/docker-entrypoint-initdb.d  # Optional: SQL init scripts
+    networks:
+      - librored-network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      timeout: 10s
+      retries: 5
+      interval: 30s
+      start_period: 40s
+
+  # LibroRed Spring Boot Application
+  librored-app:
+    build:
+      context: .
+      dockerfile: librored/docker/Dockerfile
+    container_name: librored-app
+    restart: unless-stopped
+    depends_on:
+      mysql:
+        condition: service_healthy
+    ports:
+      - "8443:8443"  # HTTPS port
+    environment:
+      # Spring Profile
+      SPRING_PROFILES_ACTIVE: docker
+      
+      # Database Configuration
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/librored?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+      SPRING_DATASOURCE_USERNAME: librored
+      SPRING_DATASOURCE_PASSWORD: librored123
+      SPRING_DATASOURCE_DRIVER_CLASS_NAME: com.mysql.cj.jdbc.Driver
+      
+      # JPA/Hibernate Configuration
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+      SPRING_JPA_DATABASE_PLATFORM: org.hibernate.dialect.MySQL8Dialect
+      SPRING_JPA_SHOW_SQL: "false"
+      SPRING_JPA_DEFER_DATASOURCE_INITIALIZATION: "true"
+      
+      # Server Configuration
+      SERVER_PORT: 8443
+      SERVER_SSL_ENABLED: "true"
+      
+      # Application Configuration
+      SPRING_APPLICATION_NAME: LibroRed
+    volumes:
+      - app_logs:/app/logs  # Optional: for log persistence
+    networks:
+      - librored-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "-k", "https://localhost:8443/actuator/health"]
+      timeout: 10s
+      retries: 5
+      interval: 30s
+      start_period: 120s  # Give app time to start
+
+# Named volumes for data persistence
+volumes:
+  mysql_data:
+    driver: local
+  app_logs:
+    driver: local
+
+# Custom network
+networks:
+  librored-network:
+    driver: bridge

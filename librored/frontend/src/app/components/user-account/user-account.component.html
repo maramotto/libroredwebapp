@@ -1,0 +1,259 @@
+<!-- User Account Page -->
+<div class="container mt-5">
+
+  <!-- Loading State -->
+  <div *ngIf="loading" class="text-center">
+    <div class="spinner-border" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+    <p>Loading user information...</p>
+  </div>
+
+  <!-- User Account Content -->
+  <div *ngIf="!loading && user">
+
+    <!-- Welcome Header -->
+    <h1 class="mb-4">Hello {{user.username}}</h1>
+
+    <!-- Navigation Menu -->
+    <div class="card mb-4">
+      <div class="card-body">
+        <h5 class="card-title">Quick Actions</h5>
+        <div class="d-flex gap-2">
+          <a routerLink="/my-books" class="btn btn-primary">
+            <i class="bi bi-book me-1"></i>Manage My Books
+          </a>
+          <a routerLink="/my-loans" class="btn btn-outline-primary">
+            <i class="bi bi-arrow-left-right me-1"></i>My Loans
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Book Recommendations Section -->
+    <div class="card p-3 mb-4">
+      <h2 class="text-center mb-3">Book Recommendations</h2>
+
+      <!-- Loading Recommendations -->
+      <div *ngIf="loadingRecommendations" class="text-center">
+        <div class="spinner-border spinner-border-sm" role="status">
+          <span class="visually-hidden">Loading recommendations...</span>
+        </div>
+        <p class="text-muted">Loading recommendations...</p>
+      </div>
+
+      <!-- Recommendations List -->
+      <div *ngIf="!loadingRecommendations">
+        <div *ngIf="recommendations.length > 0; else noRecommendations">
+          <div class="row">
+            <div *ngFor="let book of recommendations" class="col-md-6 col-lg-4 mb-3">
+              <div class="card h-100">
+                <!-- Book Cover Image -->
+                <div *ngIf="book.hasCoverImage" class="text-center p-3">
+                  <img [src]="'https://localhost:8443/api/v1/books/' + book.id + '/cover'"
+                       alt="{{book.title}} cover"
+                       class="img-fluid"
+                       style="max-height: 200px; object-fit: cover;"
+                       (error)="$event.target.style.display='none'">
+                </div>
+                <div class="card-body">
+                  <h5 class="card-title">{{book.title}}</h5>
+                  <p class="card-text">
+                    <strong>Author:</strong> {{book.author}}<br>
+                    <strong>Genre:</strong> {{book.genre}}<br>
+                    <strong>Owner:</strong> {{book.owner.username}}<br>
+                  </p>
+                  <p *ngIf="book.description" class="card-text">
+                    {{book.description}}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- No Recommendations -->
+        <ng-template #noRecommendations>
+          <div class="text-center text-muted">
+            <p>No book recommendations available at the moment.</p>
+            <p>Start creating books and loans to get personalized recommendations!</p>
+          </div>
+        </ng-template>
+      </div>
+    </div>
+
+    <!-- My Books and Loans Section -->
+    <h2 class="text-center mb-3">My Books and Loans</h2>
+
+    <div class="row mb-4">
+      <div class="col-md-6">
+        <div class="card p-3">
+          <h5>Manage My Books</h5>
+          <p class="text-muted">Create, edit, and manage your book collection</p>
+          <a routerLink="/my-books" class="btn btn-primary">
+            <i class="bi bi-book me-1"></i>Manage My Books
+          </a>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="card p-3">
+          <h5>Manage My Loans</h5>
+          <p class="text-muted">Track your lending and borrowing activities</p>
+          <a routerLink="/my-loans" class="btn btn-primary">
+            <i class="bi bi-arrow-left-right me-1"></i>Manage My Loans
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- My Account Section -->
+    <h2 class="text-center mb-3">My Account</h2>
+
+    <!-- Alert Messages -->
+    <div *ngIf="successMessage" class="alert alert-success alert-dismissible fade show" role="alert">
+      {{successMessage}}
+      <button type="button" class="btn-close" (click)="clearMessages()"></button>
+    </div>
+
+    <div *ngIf="errorMessage" class="alert alert-danger alert-dismissible fade show" role="alert">
+      {{errorMessage}}
+      <button type="button" class="btn-close" (click)="clearMessages()"></button>
+    </div>
+
+    <!-- User Information Panel -->
+    <div class="card p-3 mb-3">
+      <h5>User Information</h5>
+      <p><strong>Username:</strong> {{user.username}}</p>
+      <p><strong>Email:</strong> {{user.email}}</p>
+      <p><strong>Role:</strong> {{user.role}}</p>
+    </div>
+
+    <!-- Edit Username Form -->
+    <div class="card p-3 mb-3">
+      <h5>Change Username</h5>
+      <form (ngSubmit)="updateUsername()" #usernameForm="ngForm">
+        <div class="mb-3">
+          <label for="newUsername" class="form-label">New Username:</label>
+          <input
+            type="text"
+            id="newUsername"
+            class="form-control"
+            [(ngModel)]="newUsername"
+            name="newUsername"
+            required
+            minlength="3"
+            #usernameInput="ngModel">
+          <div *ngIf="usernameInput.invalid && usernameInput.touched" class="text-danger">
+            <small *ngIf="usernameInput.errors?.['required']">Username is required</small>
+            <small *ngIf="usernameInput.errors?.['minlength']">Username must be at least 3 characters</small>
+          </div>
+        </div>
+        <button
+          type="submit"
+          class="btn btn-primary"
+          [disabled]="usernameForm.invalid || loading">
+          <span *ngIf="loading" class="spinner-border spinner-border-sm me-2"></span>
+          Update Username
+        </button>
+      </form>
+    </div>
+
+    <!-- Change Password Form -->
+    <div class="card p-3">
+      <h5>Change Password</h5>
+
+      <!-- Step 1: Verify Current Password -->
+      <form *ngIf="!passwordVerified" (ngSubmit)="verifyPassword()" #passwordVerifyForm="ngForm">
+        <div class="mb-3">
+          <label for="currentPassword" class="form-label">Current Password:</label>
+          <input
+            type="password"
+            id="currentPassword"
+            class="form-control"
+            [(ngModel)]="currentPassword"
+            name="currentPassword"
+            required
+            #currentPasswordInput="ngModel">
+          <div *ngIf="currentPasswordInput.invalid && currentPasswordInput.touched" class="text-danger">
+            <small>Current password is required</small>
+          </div>
+        </div>
+        <button
+          type="submit"
+          class="btn btn-warning"
+          [disabled]="passwordVerifyForm.invalid || loading">
+          <span *ngIf="loading" class="spinner-border spinner-border-sm me-2"></span>
+          Verify Password
+        </button>
+      </form>
+
+      <!-- Step 2: Enter New Password (Shows after verification) -->
+      <div *ngIf="passwordVerified">
+        <div class="alert alert-success">
+          ✓ Password verified! Now enter your new password.
+        </div>
+
+        <form (ngSubmit)="updatePassword()" #newPasswordForm="ngForm">
+          <div class="mb-3">
+            <label for="newPassword" class="form-label">New Password:</label>
+            <input
+              type="password"
+              id="newPassword"
+              class="form-control"
+              [(ngModel)]="newPassword"
+              name="newPassword"
+              required
+              minlength="4"
+              #newPasswordInput="ngModel">
+            <div *ngIf="newPasswordInput.invalid && newPasswordInput.touched" class="text-danger">
+              <small *ngIf="newPasswordInput.errors?.['required']">New password is required</small>
+              <small *ngIf="newPasswordInput.errors?.['minlength']">Password must be at least 4 characters</small>
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label for="confirmPassword" class="form-label">Confirm New Password:</label>
+            <input
+              type="password"
+              id="confirmPassword"
+              class="form-control"
+              [(ngModel)]="confirmPassword"
+              name="confirmPassword"
+              required
+              #confirmPasswordInput="ngModel">
+            <div *ngIf="confirmPasswordInput.touched && newPassword !== confirmPassword" class="text-danger">
+              <small>Passwords do not match</small>
+            </div>
+          </div>
+
+          <div class="d-flex gap-2">
+            <button
+              type="submit"
+              class="btn btn-primary"
+              [disabled]="newPasswordForm.invalid || newPassword !== confirmPassword || loading">
+              <span *ngIf="loading" class="spinner-border spinner-border-sm me-2"></span>
+              Update Password
+            </button>
+            <button
+              type="button"
+              class="btn btn-secondary"
+              (click)="resetPasswordForm()">
+              Cancel
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Error State -->
+  <div *ngIf="!loading && !user" class="text-center">
+    <div class="alert alert-warning">
+      <h4>Unable to load user information</h4>
+      <p>Please try refreshing the page or <a routerLink="/login">log in again</a>.</p>
+    </div>
+  </div>
+
+</div>

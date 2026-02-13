@@ -1,0 +1,4608 @@
+{
+	"info": {
+		"_postman_id": "76632a49-7c3a-4e37-b1df-0114f433e84c",
+		"name": "LibroRed API P2",
+		"description": "Complete Postman collection for LibroRed REST API - Practice 2",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "48151065",
+		"_collection_link": "https://medinaymedia-654861.postman.co/workspace/LibroRed's-Workspace~d647e41c-7a83-49c1-8e50-714e8dd96120/collection/48151065-76632a49-7c3a-4e37-b1df-0114f433e84c?action=share&source=collection_link&creator=48151065"
+	},
+	"item": [
+		{
+			"name": "Users API",
+			"item": [
+				{
+					"name": "Get all users",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{password}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{username}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/users?page=0&size=10",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"users"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "0",
+									"description": "Page number (0-based)"
+								},
+								{
+									"key": "size",
+									"value": "10",
+									"description": "Number of items per page"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get all users",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/users",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"users"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "Text",
+							"header": [
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=31536000 ; includeSubDomains"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json;charset=UTF-8"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 03 Sep 2025 18:31:06 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"id\": 1,\n        \"username\": \"Admin\",\n        \"email\": \"admin@example.com\",\n        \"role\": \"ROLE_ADMIN\"\n    },\n    {\n        \"id\": 2,\n        \"username\": \"Alice Green\",\n        \"email\": \"alice@example.com\",\n        \"role\": \"ROLE_USER\"\n    },\n    {\n        \"id\": 3,\n        \"username\": \"Bob Staples\",\n        \"email\": \"bob@example.com\",\n        \"role\": \"ROLE_USER\"\n    },\n    {\n        \"id\": 4,\n        \"username\": \"Charlie Dock\",\n        \"email\": \"charlie@example.com\",\n        \"role\": \"ROLE_USER\"\n    },\n    {\n        \"id\": 5,\n        \"username\": \"Diana Brown\",\n        \"email\": \"diana@example.com\",\n        \"role\": \"ROLE_USER\"\n    },\n    {\n        \"id\": 6,\n        \"username\": \"Ethan Hawk\",\n        \"email\": \"ethan@example.com\",\n        \"role\": \"ROLE_USER\"\n    },\n    {\n        \"id\": 7,\n        \"username\": \"Fiona Shrek\",\n        \"email\": \"fiona@example.com\",\n        \"role\": \"ROLE_USER\"\n    },\n    {\n        \"id\": 8,\n        \"username\": \"George Orwell\",\n        \"email\": \"george@example.com\",\n        \"role\": \"ROLE_USER\"\n    },\n    {\n        \"id\": 9,\n        \"username\": \"Pepa Verde\",\n        \"email\": \"pepa@example.com\",\n        \"role\": \"ROLE_ADMIN\"\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "Get user by ID",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{password}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{username}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/users/2",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"2"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get user by ID",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/users/2",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"users",
+										"2"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "Text",
+							"header": [
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=31536000 ; includeSubDomains"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json;charset=UTF-8"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 03 Sep 2025 18:31:22 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [
+								{
+									"expires": "Invalid Date",
+									"domain": "",
+									"path": ""
+								}
+							],
+							"body": "{\n    \"id\": 1,\n    \"username\": \"Admin\",\n    \"email\": \"admin@example.com\",\n    \"role\": \"ROLE_ADMIN\"\n}"
+						},
+						{
+							"name": "Get user by ID",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/users/2",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"users",
+										"2"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "Text",
+							"header": [
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=31536000 ; includeSubDomains"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json;charset=UTF-8"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 03 Sep 2025 18:32:07 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 2,\n    \"username\": \"Alice Green\",\n    \"email\": \"alice@example.com\",\n    \"role\": \"ROLE_USER\"\n}"
+						},
+						{
+							"name": "Get user by ID",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/users/14",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"users",
+										"14"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "Text",
+							"header": [
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=31536000 ; includeSubDomains"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "0"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 03 Sep 2025 18:49:10 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "Create user",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{password}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{username}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"username\": \"newuser\",\n  \"email\": \"newuser@example.com\",\n  \"encodedPassword\": \"password123\",\n  \"roles\": [\"ROLE_USER\"]\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/users?page=0&size=10",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"users"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "0",
+									"description": "Page number (0-based)"
+								},
+								{
+									"key": "size",
+									"value": "10",
+									"description": "Number of items per page"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Create user",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "  {\n    \"username\": \"testuser123\",\n    \"email\": \"testuser123@example.com\",\n    \"role\": \"ROLE_USER\"\n  }"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/users",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"users"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "Text",
+							"header": [
+								{
+									"key": "Location",
+									"value": "https://localhost:8443/api/v1/users/11"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=31536000 ; includeSubDomains"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json;charset=UTF-8"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 03 Sep 2025 18:44:28 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 11,\n    \"username\": \"testuser123\",\n    \"email\": \"testuser123@example.com\",\n    \"role\": \"ROLE_USER\"\n}"
+						},
+						{
+							"name": "Create user",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "  {\n    \"username\": \"createUser\",\n    \"email\": \"createuser@example.com\",\n    \"role\": \"ROLE_USER\"\n  }"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/users",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"users"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "Text",
+							"header": [
+								{
+									"key": "Location",
+									"value": "https://localhost:8443/api/v1/users/13"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=31536000 ; includeSubDomains"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json;charset=UTF-8"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 03 Sep 2025 18:47:26 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 13,\n    \"username\": \"createUser\",\n    \"email\": \"createuser@example.com\",\n    \"role\": \"ROLE_USER\"\n}"
+						},
+						{
+							"name": "Create user",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "  {\n    \"username\": \"createUser\",\n    \"email\": \"createuser@example.com\",\n    \"role\": \"ROLE_USER\"\n  }"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/users",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"users"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "Text",
+							"header": [
+								{
+									"key": "Location",
+									"value": "https://localhost:8443/api/v1/users/14"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=31536000 ; includeSubDomains"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json;charset=UTF-8"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 03 Sep 2025 18:48:01 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 14,\n    \"username\": \"createUser\",\n    \"email\": \"createuser@example.com\",\n    \"role\": \"ROLE_USER\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Update user",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"username\": \"updateduser\",\n  \"email\": \"updated@example.com\",\n  \"encodedPassword\": \"newpassword123\",\n  \"roles\": [\"USER\"]\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/users/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"1"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Update user",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "  {\n    \"username\": \"updateusername\",\n    \"email\": \"update@example.com\",\n    \"role\": \"ROLE_USER\"\n  }"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/users/13",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"users",
+										"13"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "Text",
+							"header": [
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=31536000 ; includeSubDomains"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json;charset=UTF-8"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 03 Sep 2025 18:47:48 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 13,\n    \"username\": \"updateusername\",\n    \"email\": \"update@example.com\",\n    \"role\": \"ROLE_USER\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete user",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/users/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"1"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Delete user",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/users/14",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"users",
+										"14"
+									]
+								}
+							},
+							"status": "No Content",
+							"code": 204,
+							"_postman_previewlanguage": "Text",
+							"header": [
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=31536000 ; includeSubDomains"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 03 Sep 2025 18:48:20 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "Get user by username",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/users/username/john_doe",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"username",
+								"john_doe"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get user by username",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/users/username/Diana%20Brown",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"users",
+										"username",
+										"Diana%20Brown"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "Text",
+							"header": [
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=31536000 ; includeSubDomains"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json;charset=UTF-8"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 03 Sep 2025 18:52:18 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 5,\n    \"username\": \"Diana Brown\",\n    \"email\": \"diana@example.com\",\n    \"role\": \"ROLE_USER\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Get user by email",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/users/email/john@example.com",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"email",
+								"john@example.com"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get user by email",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/users/email/alice@example.com",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"users",
+										"email",
+										"alice@example.com"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "Text",
+							"header": [
+								{
+									"key": "Content-Disposition",
+									"value": "inline;filename=f.txt"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=31536000 ; includeSubDomains"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json;charset=UTF-8"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 03 Sep 2025 18:50:27 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 2,\n    \"username\": \"Alice Green\",\n    \"email\": \"alice@example.com\",\n    \"role\": \"ROLE_USER\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Get valid borrowers",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/users/1/valid-borrowers",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"1",
+								"valid-borrowers"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get valid borrowers",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/users/4/valid-borrowers",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"users",
+										"4",
+										"valid-borrowers"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "Text",
+							"header": [
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=31536000 ; includeSubDomains"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json;charset=UTF-8"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 03 Sep 2025 18:50:43 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"id\": 2,\n        \"username\": \"Alice Green\"\n    },\n    {\n        \"id\": 3,\n        \"username\": \"Bob Staples\"\n    },\n    {\n        \"id\": 5,\n        \"username\": \"Diana Brown\"\n    },\n    {\n        \"id\": 6,\n        \"username\": \"Ethan Hawk\"\n    },\n    {\n        \"id\": 7,\n        \"username\": \"Fiona Shrek\"\n    },\n    {\n        \"id\": 8,\n        \"username\": \"George Orwell\"\n    },\n    {\n        \"id\": 11,\n        \"username\": \"testuser123\"\n    },\n    {\n        \"id\": 12,\n        \"username\": \"testuser123\"\n    },\n    {\n        \"id\": 13,\n        \"username\": \"updateusername\"\n    }\n]"
+						}
+					]
+				}
+			],
+			"auth": {
+				"type": "basic",
+				"basic": [
+					{
+						"key": "password",
+						"value": "{{password}}",
+						"type": "string"
+					},
+					{
+						"key": "username",
+						"value": "{{username}}",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Books API",
+			"item": [
+				{
+					"name": "Get all books",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{password}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{username}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/books?page=0&size=10",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"books"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "0",
+									"description": "Page number (0-based)"
+								},
+								{
+									"key": "size",
+									"value": "10",
+									"description": "Number of items per page"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get all books",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/books?page=0&size=10",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"books"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "0",
+											"description": "Page number (0-based)"
+										},
+										{
+											"key": "size",
+											"value": "10",
+											"description": "Number of items per page"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "Text",
+							"header": [
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=31536000 ; includeSubDomains"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json;charset=UTF-8"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 03 Sep 2025 19:12:53 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"id\": 1,\n        \"title\": \"The Great Adventure\",\n        \"author\": \"John Doe\",\n        \"genre\": \"Fiction\",\n        \"description\": \"An epic tale of discovery and courage.\",\n        \"hasCoverImage\": true,\n        \"owner\": {\n            \"id\": 2,\n            \"username\": \"Alice Green\"\n        }\n    },\n    {\n        \"id\": 2,\n        \"title\": \"Galactic Wars\",\n        \"author\": \"Emily Carter\",\n        \"genre\": \"SciFi_Fantasy\",\n        \"description\": \"An interstellar battle for survival in a distant galaxy.\",\n        \"hasCoverImage\": true,\n        \"owner\": {\n            \"id\": 2,\n            \"username\": \"Alice Green\"\n        }\n    },\n    {\n        \"id\": 3,\n        \"title\": \"The Silent Killer\",\n        \"author\": \"Mark Johnson\",\n        \"genre\": \"Mystery_Thriller\",\n        \"description\": \"A detective investigates a series of cryptic murders.\",\n        \"hasCoverImage\": true,\n        \"owner\": {\n            \"id\": 2,\n            \"username\": \"Alice Green\"\n        }\n    },\n    {\n        \"id\": 4,\n        \"title\": \"The Last Pharaoh\",\n        \"author\": \"Wilbur Smith\",\n        \"genre\": \"Historical_Fiction\",\n        \"description\": \"The final days of an Egyptian dynasty.\",\n        \"hasCoverImage\": true,\n        \"owner\": {\n            \"id\": 2,\n            \"username\": \"Alice Green\"\n        }\n    },\n    {\n        \"id\": 5,\n        \"title\": \"The Science of Everything\",\n        \"author\": \"Jane Smith\",\n        \"genre\": \"Non_Fiction\",\n        \"description\": \"A deep dive into the wonders of modern science.\",\n        \"hasCoverImage\": true,\n        \"owner\": {\n            \"id\": 3,\n            \"username\": \"Bob Staples\"\n        }\n    },\n    {\n        \"id\": 6,\n        \"title\": \"The Cursed Woods\",\n        \"author\": \"Stephen King\",\n        \"genre\": \"Horror\",\n        \"description\": \"A mysterious forest where people disappear.\",\n        \"hasCoverImage\": true,\n        \"owner\": {\n            \"id\": 3,\n            \"username\": \"Bob Staples\"\n        }\n    },\n    {\n        \"id\": 7,\n        \"title\": \"Unwritten Letters\",\n        \"author\": \"Nicholas Sparks\",\n        \"genre\": \"Romance\",\n        \"description\": \"A series of letters change a woman’s fate.\",\n        \"hasCoverImage\": true,\n        \"owner\": {\n            \"id\": 3,\n            \"username\": \"Bob Staples\"\n        }\n    },\n    {\n        \"id\": 8,\n        \"title\": \"Chronicles of Eldoria\",\n        \"author\": \"Brandon Sanderson\",\n        \"genre\": \"SciFi_Fantasy\",\n        \"description\": \"A young mage embarks on a heroic quest.\",\n        \"hasCoverImage\": true,\n        \"owner\": {\n            \"id\": 3,\n            \"username\": \"Bob Staples\"\n        }\n    },\n    {\n        \"id\": 9,\n        \"title\": \"Whispers in the Dark\",\n        \"author\": \"Angela Carter\",\n        \"genre\": \"Mystery_Thriller\",\n        \"description\": \"A journalist uncovers a hidden conspiracy.\",\n        \"hasCoverImage\": true,\n        \"owner\": {\n            \"id\": 4,\n            \"username\": \"Charlie Dock\"\n        }\n    },\n    {\n        \"id\": 10,\n        \"title\": \"Echoes of Tomorrow\",\n        \"author\": \"Robert Martin\",\n        \"genre\": \"Fiction\",\n        \"description\": \"A mysterious journey through time.\",\n        \"hasCoverImage\": true,\n        \"owner\": {\n            \"id\": 4,\n            \"username\": \"Charlie Dock\"\n        }\n    },\n    {\n        \"id\": 11,\n        \"title\": \"The Emperor’s Shadow\",\n        \"author\": \"Ken Follett\",\n        \"genre\": \"Historical_Fiction\",\n        \"description\": \"A Roman general’s fight for justice.\",\n        \"hasCoverImage\": true,\n        \"owner\": {\n            \"id\": 4,\n            \"username\": \"Charlie Dock\"\n        }\n    },\n    {\n        \"id\": 12,\n        \"title\": \"The Night Visitor\",\n        \"author\": \"Dean Koontz\",\n        \"genre\": \"Horror\",\n        \"description\": \"A chilling presence haunts a woman’s dreams.\",\n        \"hasCoverImage\": true,\n        \"owner\": {\n            \"id\": 4,\n            \"username\": \"Charlie Dock\"\n        }\n    },\n    {\n        \"id\": 13,\n        \"title\": \"The Cyber Revolution\",\n        \"author\": \"Isaac Asimov\",\n        \"genre\": \"SciFi_Fantasy\",\n        \"description\": \"The rise of AI and its impact on humanity.\",\n        \"hasCoverImage\": true,\n        \"owner\": {\n            \"id\": 5,\n            \"username\": \"Diana Brown\"\n        }\n    },\n    {\n        \"id\": 14,\n        \"title\": \"Understanding the Universe\",\n        \"author\": \"Neil Tyson\",\n        \"genre\": \"Non_Fiction\",\n        \"description\": \"A simplified guide to the cosmos.\",\n        \"hasCoverImage\": true,\n        \"owner\": {\n            \"id\": 5,\n            \"username\": \"Diana Brown\"\n        }\n    },\n    {\n        \"id\": 15,\n        \"title\": \"Shadows Beneath\",\n        \"author\": \"Clive Barker\",\n        \"genre\": \"Horror\",\n        \"description\": \"Something lurks in the depths of an abandoned hospital.\",\n        \"hasCoverImage\": true,\n        \"owner\": {\n            \"id\": 5,\n            \"username\": \"Diana Brown\"\n        }\n    },\n    {\n        \"id\": 16,\n        \"title\": \"A Parisian Affair\",\n        \"author\": \"Megan Hart\",\n        \"genre\": \"Romance\",\n        \"description\": \"A love story set in the heart of Paris.\",\n        \"hasCoverImage\": true,\n        \"owner\": {\n            \"id\": 5,\n            \"username\": \"Diana Brown\"\n        }\n    },\n    {\n        \"id\": 17,\n        \"title\": \"Midnight Serenade\",\n        \"author\": \"Emily Bronte\",\n        \"genre\": \"Romance\",\n        \"description\": \"A musician falls for a mysterious stranger.\",\n        \"hasCoverImage\": true,\n        \"owner\": {\n            \"id\": 6,\n            \"username\": \"Ethan Hawk\"\n        }\n    },\n    {\n        \"id\": 18,\n        \"title\": \"Vanishing Shadows\",\n        \"author\": \"Lisa Scott\",\n        \"genre\": \"Mystery_Thriller\",\n        \"description\": \"A small town hides dark secrets.\",\n        \"hasCoverImage\": true,\n        \"owner\": {\n            \"id\": 6,\n            \"username\": \"Ethan Hawk\"\n        }\n    },\n    {\n        \"id\": 19,\n        \"title\": \"Warrior’s Legacy\",\n        \"author\": \"Conn Iggulden\",\n        \"genre\": \"Historical_Fiction\",\n        \"description\": \"A samurai’s tale of honor and revenge.\",\n        \"hasCoverImage\": true,\n        \"owner\": {\n            \"id\": 6,\n            \"username\": \"Ethan Hawk\"\n        }\n    },\n    {\n        \"id\": 20,\n        \"title\": \"The Last Horizon\",\n        \"author\": \"Alice Walker\",\n        \"genre\": \"Fiction\",\n        \"description\": \"A gripping story of survival in an uncharted land.\",\n        \"hasCoverImage\": true,\n        \"owner\": {\n            \"id\": 6,\n            \"username\": \"Ethan Hawk\"\n        }\n    },\n    {\n        \"id\": 21,\n        \"title\": \"The Forgotten Kingdom\",\n        \"author\": \"Henry Williams\",\n        \"genre\": \"Historical_Fiction\",\n        \"description\": \"A lost kingdom and the quest to uncover its past.\",\n        \"hasCoverImage\": true,\n        \"owner\": {\n            \"id\": 7,\n            \"username\": \"Fiona Shrek\"\n        }\n    },\n    {\n        \"id\": 22,\n        \"title\": \"History’s Greatest Inventions\",\n        \"author\": \"David Attenborough\",\n        \"genre\": \"Non_Fiction\",\n        \"description\": \"The key inventions that shaped the modern world.\",\n        \"hasCoverImage\": true,\n        \"owner\": {\n            \"id\": 7,\n            \"username\": \"Fiona Shrek\"\n        }\n    },\n    {\n        \"id\": 23,\n        \"title\": \"The Haunted Manor\",\n        \"author\": \"Laura Brown\",\n        \"genre\": \"Horror\",\n        \"description\": \"A family moves into a house with a terrifying past.\",\n        \"hasCoverImage\": true,\n        \"owner\": {\n            \"id\": 8,\n            \"username\": \"George Orwell\"\n        }\n    },\n    {\n        \"id\": 24,\n        \"title\": \"The Great Adventure\",\n        \"author\": \"John Doe\",\n        \"genre\": \"Fiction\",\n        \"description\": \"An epic tale of discovery and courage.\",\n        \"hasCoverImage\": true,\n        \"owner\": {\n            \"id\": 8,\n            \"username\": \"George Orwell\"\n        }\n    },\n    {\n        \"id\": 25,\n        \"title\": \"Love in the Rain\",\n        \"author\": \"Sophia Lee\",\n        \"genre\": \"Romance\",\n        \"description\": \"Two souls find each other in the midst of a storm.\",\n        \"hasCoverImage\": true,\n        \"owner\": {\n            \"id\": 8,\n            \"username\": \"George Orwell\"\n        }\n    },\n    {\n        \"id\": 27,\n        \"title\": \"Test Book TEST\",\n        \"author\": \"Anita Powell\",\n        \"genre\": \"Mystery_Thriller\",\n        \"description\": \"Test book. Not a real book.\",\n        \"hasCoverImage\": true,\n        \"owner\": {\n            \"id\": 5,\n            \"username\": \"Diana Brown\"\n        }\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "Get books - Page 2 (Pagination Example)",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{password}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{username}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/books?page=1&size=5",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"books"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1",
+									"description": "Page number (0-based) - Second page"
+								},
+								{
+									"key": "size",
+									"value": "5",
+									"description": "Smaller page size to demonstrate pagination"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get books - Page 2",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/books?page=1&size=5",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"books"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1",
+											"description": "Page number (0-based)"
+										},
+										{
+											"key": "size",
+											"value": "5",
+											"description": "Number of items per page"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"content\": [\n        {\n            \"id\": 6,\n            \"title\": \"The Cursed Woods\",\n            \"author\": \"Stephen King\",\n            \"genre\": \"Horror\",\n            \"description\": \"A mysterious forest where people disappear.\",\n            \"hasCoverImage\": true,\n            \"owner\": {\n                \"id\": 3,\n                \"username\": \"Bob Staples\"\n            }\n        }\n    ],\n    \"currentPage\": 1,\n    \"totalPages\": 6,\n    \"totalItems\": 28,\n    \"hasNext\": true,\n    \"hasPrevious\": true,\n    \"isFirst\": false,\n    \"isLast\": false\n}"
+						}
+					]
+				},
+				{
+					"name": "Get book by ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/books/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"books",
+								"1"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get book by ID",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/books/1",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"books",
+										"1"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "Text",
+							"header": [
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=31536000 ; includeSubDomains"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json;charset=UTF-8"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 03 Sep 2025 19:06:27 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 1,\n    \"title\": \"The Great Adventure\",\n    \"author\": \"John Doe\",\n    \"genre\": \"Fiction\",\n    \"description\": \"An epic tale of discovery and courage.\",\n    \"hasCoverImage\": true,\n    \"owner\": {\n        \"id\": 2,\n        \"username\": \"Alice Green\"\n    }\n}"
+						},
+						{
+							"name": "Get book by ID",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/books/2",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"books",
+										"2"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "Text",
+							"header": [
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=31536000 ; includeSubDomains"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json;charset=UTF-8"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 03 Sep 2025 19:07:45 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 2,\n    \"title\": \"Galactic Wars\",\n    \"author\": \"Emily Carter\",\n    \"genre\": \"SciFi_Fantasy\",\n    \"description\": \"An interstellar battle for survival in a distant galaxy.\",\n    \"hasCoverImage\": true,\n    \"owner\": {\n        \"id\": 2,\n        \"username\": \"Alice Green\"\n    }\n}"
+						},
+						{
+							"name": "Get book by ID",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/books/30",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"books",
+										"30"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "Text",
+							"header": [
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=31536000 ; includeSubDomains"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "0"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 03 Sep 2025 19:32:59 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "Create book",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{password}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{username}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "  {\n      \"title\": \"Create Book by API\",\n      \"author\": \"John Doe\",\n      \"genre\": \"FICTION\",\n      \"description\": \"Testing API CREATE BOOK endpoint\",\n      \"owner\": {\n          \"id\": 1,\n          \"username\": \"Admin\"\n      }\n  }"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/books",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"books"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Create book",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "  {\n      \"title\": \"Create Book by API\",\n      \"author\": \"John Doe\",\n      \"genre\": \"Fiction\",\n      \"description\": \"Testing API CREATE BOOK endpoint\",\n      \"owner\": {\n          \"id\": 1,\n          \"username\": \"Admin\"\n      }\n  }"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/books",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"books"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "Text",
+							"header": [
+								{
+									"key": "Location",
+									"value": "https://localhost:8443/api/v1/books/28"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=31536000 ; includeSubDomains"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json;charset=UTF-8"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 03 Sep 2025 19:29:39 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 28,\n    \"title\": \"Create Book by API\",\n    \"author\": \"John Doe\",\n    \"genre\": \"Fiction\",\n    \"description\": \"Testing API CREATE BOOK endpoint\",\n    \"hasCoverImage\": false,\n    \"owner\": {\n        \"id\": 1,\n        \"username\": \"Admin\"\n    }\n}"
+						},
+						{
+							"name": "Create book",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "  {\n      \"title\": \"Create A Book by API to UPDATE\",\n      \"author\": \"John Doe\",\n      \"genre\": \"Fiction\",\n      \"description\": \"Testing API CREATE BOOK endpoint\",\n      \"owner\": {\n          \"id\": 1,\n          \"username\": \"Admin\"\n      }\n  }"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/books",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"books"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "Text",
+							"header": [
+								{
+									"key": "Location",
+									"value": "https://localhost:8443/api/v1/books/29"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=31536000 ; includeSubDomains"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json;charset=UTF-8"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 03 Sep 2025 19:30:39 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 29,\n    \"title\": \"Create A Book by API to UPDATE\",\n    \"author\": \"John Doe\",\n    \"genre\": \"Fiction\",\n    \"description\": \"Testing API CREATE BOOK endpoint\",\n    \"hasCoverImage\": false,\n    \"owner\": {\n        \"id\": 1,\n        \"username\": \"Admin\"\n    }\n}"
+						},
+						{
+							"name": "Create book",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "  {\n      \"title\": \"Create A Book by API to DELETE\",\n      \"author\": \"John Doe\",\n      \"genre\": \"Fiction\",\n      \"description\": \"Testing API CREATE BOOK endpoint but we will delete it\",\n      \"owner\": {\n          \"id\": 1,\n          \"username\": \"Admin\"\n      }\n  }"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/books",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"books"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "Text",
+							"header": [
+								{
+									"key": "Location",
+									"value": "https://localhost:8443/api/v1/books/30"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=31536000 ; includeSubDomains"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json;charset=UTF-8"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 03 Sep 2025 19:32:32 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 30,\n    \"title\": \"Create A Book by API to DELETE\",\n    \"author\": \"John Doe\",\n    \"genre\": \"Fiction\",\n    \"description\": \"Testing API CREATE BOOK endpoint but we will delete it\",\n    \"hasCoverImage\": false,\n    \"owner\": {\n        \"id\": 1,\n        \"username\": \"Admin\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Update book",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"title\": \"Updated Book Title\",\n  \"author\": \"Updated Author\",\n  \"genre\": \"Science Fiction\",\n  \"description\": \"An updated description...\",\n  \"publicationYear\": 2024,\n  \"isbn\": \"978-0987654321\",\n  \"ownerId\": 1\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/books/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"books",
+								"1"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Update book",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "  {\n      \"title\": \"UPDATE A Book by API\",\n      \"author\": \"Anita Powell\",\n      \"genre\": \"Fiction\",\n      \"description\": \"Testing API UPDATE BOOK endpoint\",\n      \"owner\": {\n          \"id\": 1,\n          \"username\": \"Admin\"\n      }\n  }"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/books/1",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"books",
+										"1"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "Text",
+							"header": [
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=31536000 ; includeSubDomains"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json;charset=UTF-8"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 03 Sep 2025 19:31:45 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 1,\n    \"title\": \"UPDATE A Book by API\",\n    \"author\": \"Anita Powell\",\n    \"genre\": \"Fiction\",\n    \"description\": \"Testing API UPDATE BOOK endpoint\",\n    \"hasCoverImage\": true,\n    \"owner\": {\n        \"id\": 1,\n        \"username\": \"Admin\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete book",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/books/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"books",
+								"1"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Delete book",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/books/30",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"books",
+										"30"
+									]
+								}
+							},
+							"status": "No Content",
+							"code": 204,
+							"_postman_previewlanguage": "Text",
+							"header": [
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=31536000 ; includeSubDomains"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 03 Sep 2025 19:32:49 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "Get books by owner",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/books/owner/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"books",
+								"owner",
+								"1"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get books by owner",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/books/owner/1",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"books",
+										"owner",
+										"1"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "Text",
+							"header": [
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=31536000 ; includeSubDomains"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json;charset=UTF-8"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 03 Sep 2025 20:06:54 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"id\": 1,\n        \"title\": \"UPDATE A Book by API\",\n        \"author\": \"Anita Powell\",\n        \"genre\": \"Fiction\",\n        \"description\": \"Testing API UPDATE BOOK endpoint\",\n        \"hasCoverImage\": true,\n        \"owner\": {\n            \"id\": 1,\n            \"username\": \"Admin\"\n        }\n    },\n    {\n        \"id\": 28,\n        \"title\": \"Create Book by API\",\n        \"author\": \"John Doe\",\n        \"genre\": \"Fiction\",\n        \"description\": \"Testing API CREATE BOOK endpoint\",\n        \"hasCoverImage\": false,\n        \"owner\": {\n            \"id\": 1,\n            \"username\": \"Admin\"\n        }\n    },\n    {\n        \"id\": 29,\n        \"title\": \"Create A Book by API to UPDATE\",\n        \"author\": \"John Doe\",\n        \"genre\": \"Fiction\",\n        \"description\": \"Testing API CREATE BOOK endpoint\",\n        \"hasCoverImage\": false,\n        \"owner\": {\n            \"id\": 1,\n            \"username\": \"Admin\"\n        }\n    }\n]"
+						},
+						{
+							"name": "Get books by owner",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/books/owner/5",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"books",
+										"owner",
+										"5"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "Text",
+							"header": [
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=31536000 ; includeSubDomains"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json;charset=UTF-8"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 03 Sep 2025 20:11:28 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"id\": 13,\n        \"title\": \"The Cyber Revolution\",\n        \"author\": \"Isaac Asimov\",\n        \"genre\": \"SciFi_Fantasy\",\n        \"description\": \"The rise of AI and its impact on humanity.\",\n        \"hasCoverImage\": true,\n        \"owner\": {\n            \"id\": 5,\n            \"username\": \"Diana Brown\"\n        }\n    },\n    {\n        \"id\": 14,\n        \"title\": \"Understanding the Universe\",\n        \"author\": \"Neil Tyson\",\n        \"genre\": \"Non_Fiction\",\n        \"description\": \"A simplified guide to the cosmos.\",\n        \"hasCoverImage\": true,\n        \"owner\": {\n            \"id\": 5,\n            \"username\": \"Diana Brown\"\n        }\n    },\n    {\n        \"id\": 15,\n        \"title\": \"Shadows Beneath\",\n        \"author\": \"Clive Barker\",\n        \"genre\": \"Horror\",\n        \"description\": \"Something lurks in the depths of an abandoned hospital.\",\n        \"hasCoverImage\": true,\n        \"owner\": {\n            \"id\": 5,\n            \"username\": \"Diana Brown\"\n        }\n    },\n    {\n        \"id\": 16,\n        \"title\": \"A Parisian Affair\",\n        \"author\": \"Megan Hart\",\n        \"genre\": \"Romance\",\n        \"description\": \"A love story set in the heart of Paris.\",\n        \"hasCoverImage\": true,\n        \"owner\": {\n            \"id\": 5,\n            \"username\": \"Diana Brown\"\n        }\n    },\n    {\n        \"id\": 27,\n        \"title\": \"Test Book TEST\",\n        \"author\": \"Anita Powell\",\n        \"genre\": \"Mystery_Thriller\",\n        \"description\": \"Test book. Not a real book.\",\n        \"hasCoverImage\": true,\n        \"owner\": {\n            \"id\": 5,\n            \"username\": \"Diana Brown\"\n        }\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "Get available books by owner",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/books/available/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"books",
+								"available",
+								"1"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get available books by owner",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/books/available/1",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"books",
+										"available",
+										"1"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "Text",
+							"header": [
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=31536000 ; includeSubDomains"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json;charset=UTF-8"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 03 Sep 2025 19:34:13 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"id\": 1,\n        \"title\": \"UPDATE A Book by API\",\n        \"author\": \"Anita Powell\"\n    },\n    {\n        \"id\": 28,\n        \"title\": \"Create Book by API\",\n        \"author\": \"John Doe\"\n    },\n    {\n        \"id\": 29,\n        \"title\": \"Create A Book by API to UPDATE\",\n        \"author\": \"John Doe\"\n    }\n]"
+						},
+						{
+							"name": "Get available books by owner",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/books/available/5",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"books",
+										"available",
+										"5"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "Text",
+							"header": [
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=31536000 ; includeSubDomains"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json;charset=UTF-8"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 03 Sep 2025 20:11:41 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"id\": 13,\n        \"title\": \"The Cyber Revolution\",\n        \"author\": \"Isaac Asimov\"\n    },\n    {\n        \"id\": 14,\n        \"title\": \"Understanding the Universe\",\n        \"author\": \"Neil Tyson\"\n    },\n    {\n        \"id\": 15,\n        \"title\": \"Shadows Beneath\",\n        \"author\": \"Clive Barker\"\n    },\n    {\n        \"id\": 27,\n        \"title\": \"Test Book TEST\",\n        \"author\": \"Anita Powell\"\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "Get book recommendations",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/books/recommendations/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"books",
+								"recommendations",
+								"1"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get book recommendations",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/books/recommendations/6",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"books",
+										"recommendations",
+										"6"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "Text",
+							"header": [
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=31536000 ; includeSubDomains"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json;charset=UTF-8"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 03 Sep 2025 20:12:16 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"id\": 2,\n        \"title\": \"Galactic Wars\",\n        \"author\": \"Emily Carter\",\n        \"genre\": \"SciFi_Fantasy\",\n        \"description\": \"An interstellar battle for survival in a distant galaxy.\",\n        \"hasCoverImage\": true,\n        \"owner\": {\n            \"id\": 2,\n            \"username\": \"Alice Green\"\n        }\n    },\n    {\n        \"id\": 8,\n        \"title\": \"Chronicles of Eldoria\",\n        \"author\": \"Brandon Sanderson\",\n        \"genre\": \"SciFi_Fantasy\",\n        \"description\": \"A young mage embarks on a heroic quest.\",\n        \"hasCoverImage\": true,\n        \"owner\": {\n            \"id\": 3,\n            \"username\": \"Bob Staples\"\n        }\n    },\n    {\n        \"id\": 9,\n        \"title\": \"Whispers in the Dark\",\n        \"author\": \"Angela Carter\",\n        \"genre\": \"Mystery_Thriller\",\n        \"description\": \"A journalist uncovers a hidden conspiracy.\",\n        \"hasCoverImage\": true,\n        \"owner\": {\n            \"id\": 4,\n            \"username\": \"Charlie Dock\"\n        }\n    },\n    {\n        \"id\": 27,\n        \"title\": \"Test Book TEST\",\n        \"author\": \"Anita Powell\",\n        \"genre\": \"Mystery_Thriller\",\n        \"description\": \"Test book. Not a real book.\",\n        \"hasCoverImage\": true,\n        \"owner\": {\n            \"id\": 5,\n            \"username\": \"Diana Brown\"\n        }\n    }\n]"
+						},
+						{
+							"name": "Get book recommendations",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/books/recommendations/1",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"books",
+										"recommendations",
+										"1"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "Text",
+							"header": [
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=31536000 ; includeSubDomains"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json;charset=UTF-8"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 03 Sep 2025 20:17:53 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "[]"
+						}
+					]
+				},
+				{
+					"name": "Get books per genre stats",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/books/stats/genre",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"books",
+								"stats",
+								"genre"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get books per genre stats",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/books/stats/genre",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"books",
+										"stats",
+										"genre"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "Text",
+							"header": [
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=31536000 ; includeSubDomains"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json;charset=UTF-8"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 03 Sep 2025 20:18:02 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"SciFi_Fantasy\": 3,\n    \"Mystery_Thriller\": 4,\n    \"Horror\": 4,\n    \"Romance\": 4,\n    \"Non_Fiction\": 3,\n    \"Historical_Fiction\": 4,\n    \"Fiction\": 6\n}"
+						}
+					]
+				},
+				{
+					"name": "Get paginated books (Web API)",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/books?page=0&size=8",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"books"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "size",
+									"value": "8"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get paginated books (Web API)",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/books?page=0&size=8",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"books"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "0"
+										},
+										{
+											"key": "size",
+											"value": "8"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "Text",
+							"header": [
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=31536000 ; includeSubDomains"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json;charset=UTF-8"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 03 Sep 2025 20:28:15 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"totalItems\": 28,\n    \"last\": false,\n    \"totalPages\": 4,\n    \"currentPage\": 0,\n    \"content\": [\n        {\n            \"owner\": {\n                \"id\": 1,\n                \"username\": \"Admin\"\n            },\n            \"hasCoverImage\": true,\n            \"author\": \"Anita Powell\",\n            \"genre\": \"Fiction\",\n            \"description\": \"Testing API UPDATE BOOK endpoint\",\n            \"id\": 1,\n            \"title\": \"UPDATE A Book by API\"\n        },\n        {\n            \"owner\": {\n                \"id\": 2,\n                \"username\": \"Alice Green\"\n            },\n            \"hasCoverImage\": true,\n            \"author\": \"Emily Carter\",\n            \"genre\": \"SciFi_Fantasy\",\n            \"description\": \"An interstellar battle for survival in a distant galaxy.\",\n            \"id\": 2,\n            \"title\": \"Galactic Wars\"\n        },\n        {\n            \"owner\": {\n                \"id\": 2,\n                \"username\": \"Alice Green\"\n            },\n            \"hasCoverImage\": true,\n            \"author\": \"Mark Johnson\",\n            \"genre\": \"Mystery_Thriller\",\n            \"description\": \"A detective investigates a series of cryptic murders.\",\n            \"id\": 3,\n            \"title\": \"The Silent Killer\"\n        },\n        {\n            \"owner\": {\n                \"id\": 2,\n                \"username\": \"Alice Green\"\n            },\n            \"hasCoverImage\": true,\n            \"author\": \"Wilbur Smith\",\n            \"genre\": \"Historical_Fiction\",\n            \"description\": \"The final days of an Egyptian dynasty.\",\n            \"id\": 4,\n            \"title\": \"The Last Pharaoh\"\n        },\n        {\n            \"owner\": {\n                \"id\": 3,\n                \"username\": \"Bob Staples\"\n            },\n            \"hasCoverImage\": true,\n            \"author\": \"Jane Smith\",\n            \"genre\": \"Non_Fiction\",\n            \"description\": \"A deep dive into the wonders of modern science.\",\n            \"id\": 5,\n            \"title\": \"The Science of Everything\"\n        },\n        {\n            \"owner\": {\n                \"id\": 3,\n                \"username\": \"Bob Staples\"\n            },\n            \"hasCoverImage\": true,\n            \"author\": \"Stephen King\",\n            \"genre\": \"Horror\",\n            \"description\": \"A mysterious forest where people disappear.\",\n            \"id\": 6,\n            \"title\": \"The Cursed Woods\"\n        },\n        {\n            \"owner\": {\n                \"id\": 3,\n                \"username\": \"Bob Staples\"\n            },\n            \"hasCoverImage\": true,\n            \"author\": \"Nicholas Sparks\",\n            \"genre\": \"Romance\",\n            \"description\": \"A series of letters change a woman’s fate.\",\n            \"id\": 7,\n            \"title\": \"Unwritten Letters\"\n        },\n        {\n            \"owner\": {\n                \"id\": 3,\n                \"username\": \"Bob Staples\"\n            },\n            \"hasCoverImage\": true,\n            \"author\": \"Brandon Sanderson\",\n            \"genre\": \"SciFi_Fantasy\",\n            \"description\": \"A young mage embarks on a heroic quest.\",\n            \"id\": 8,\n            \"title\": \"Chronicles of Eldoria\"\n        }\n    ]\n}"
+						}
+					]
+				}
+			],
+			"auth": {
+				"type": "basic",
+				"basic": [
+					{
+						"key": "password",
+						"value": "{{password}}",
+						"type": "string"
+					},
+					{
+						"key": "username",
+						"value": "{{username}}",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Book Images",
+			"item": [
+				{
+					"name": "Upload book cover",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{password}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{username}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"description": "Book cover image file (JPEG, PNG) - Click 'Select Files' to choose an image",
+									"type": "file",
+									"src": "postman-cloud:///1f089871-ab81-4fb0-9767-4bbec0328ace"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/books/1/cover",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"books",
+								"1",
+								"cover"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Cover uploaded successfully",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "cover",
+											"description": "Book cover image file",
+											"type": "file",
+											"src": []
+										}
+									]
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/books/1/cover",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"books",
+										"1",
+										"cover"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Cover uploaded successfully\"\n}"
+						},
+						{
+							"name": "Upload book cover",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "file",
+											"description": "Book cover image file (JPEG, PNG) - Click 'Select Files' to choose an image",
+											"type": "file",
+											"src": "postman-cloud:///1f089871-ab81-4fb0-9767-4bbec0328ace"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/books/1/cover",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"books",
+										"1",
+										"cover"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "",
+							"header": [
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json;charset=UTF-8"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 04 Sep 2025 12:10:28 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"fileName\": \"new_cover_API_pic1.jpg\",\n    \"size\": \"31108\",\n    \"message\": \"Cover image uploaded successfully\",\n    \"bookId\": \"1\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Get book cover",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{password}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{username}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "image/*"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/books/1/cover",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"books",
+								"1",
+								"cover"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Cover retrieved successfully",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "image/*"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/books/1/cover",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"books",
+										"1",
+										"cover"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "Text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "image/jpeg"
+								}
+							],
+							"cookie": [],
+							"body": "(Binary image data)"
+						}
+					]
+				}
+			],
+			"auth": {
+				"type": "basic",
+				"basic": [
+					{
+						"key": "password",
+						"value": "pass",
+						"type": "string"
+					},
+					{
+						"key": "username",
+						"value": "admin@example.com",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Loans API",
+			"item": [
+				{
+					"name": "Get all loans",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{password}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{username}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/loans?page=0&size=10",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"loans"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "0",
+									"description": "Page number (0-based)"
+								},
+								{
+									"key": "size",
+									"value": "10",
+									"description": "Number of items per page"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get all loans",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/loans",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"loans"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "Text",
+							"header": [
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=31536000 ; includeSubDomains"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json;charset=UTF-8"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 03 Sep 2025 20:29:05 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"id\": 1,\n        \"book\": {\n            \"id\": 1,\n            \"title\": \"UPDATE A Book by API\",\n            \"author\": \"Anita Powell\"\n        },\n        \"lender\": {\n            \"id\": 2,\n            \"username\": \"Alice Green\"\n        },\n        \"borrower\": {\n            \"id\": 3,\n            \"username\": \"Bob Staples\"\n        },\n        \"startDate\": \"2025-01-01\",\n        \"endDate\": \"2025-01-15\",\n        \"status\": \"Completed\"\n    },\n    {\n        \"id\": 2,\n        \"book\": {\n            \"id\": 5,\n            \"title\": \"The Science of Everything\",\n            \"author\": \"Jane Smith\"\n        },\n        \"lender\": {\n            \"id\": 3,\n            \"username\": \"Bob Staples\"\n        },\n        \"borrower\": {\n            \"id\": 4,\n            \"username\": \"Charlie Dock\"\n        },\n        \"startDate\": \"2025-01-05\",\n        \"endDate\": \"2025-01-20\",\n        \"status\": \"Completed\"\n    },\n    {\n        \"id\": 3,\n        \"book\": {\n            \"id\": 9,\n            \"title\": \"Whispers in the Dark\",\n            \"author\": \"Angela Carter\"\n        },\n        \"lender\": {\n            \"id\": 4,\n            \"username\": \"Charlie Dock\"\n        },\n        \"borrower\": {\n            \"id\": 5,\n            \"username\": \"Diana Brown\"\n        },\n        \"startDate\": \"2025-01-10\",\n        \"endDate\": \"2025-01-25\",\n        \"status\": \"Completed\"\n    },\n    {\n        \"id\": 4,\n        \"book\": {\n            \"id\": 13,\n            \"title\": \"The Cyber Revolution\",\n            \"author\": \"Isaac Asimov\"\n        },\n        \"lender\": {\n            \"id\": 5,\n            \"username\": \"Diana Brown\"\n        },\n        \"borrower\": {\n            \"id\": 6,\n            \"username\": \"Ethan Hawk\"\n        },\n        \"startDate\": \"2025-01-15\",\n        \"endDate\": \"2025-01-30\",\n        \"status\": \"Completed\"\n    },\n    {\n        \"id\": 5,\n        \"book\": {\n            \"id\": 17,\n            \"title\": \"Midnight Serenade\",\n            \"author\": \"Emily Bronte\"\n        },\n        \"lender\": {\n            \"id\": 6,\n            \"username\": \"Ethan Hawk\"\n        },\n        \"borrower\": {\n            \"id\": 7,\n            \"username\": \"Fiona Shrek\"\n        },\n        \"startDate\": \"2025-01-20\",\n        \"endDate\": \"2025-02-04\",\n        \"status\": \"Completed\"\n    },\n    {\n        \"id\": 6,\n        \"book\": {\n            \"id\": 21,\n            \"title\": \"The Forgotten Kingdom\",\n            \"author\": \"Henry Williams\"\n        },\n        \"lender\": {\n            \"id\": 7,\n            \"username\": \"Fiona Shrek\"\n        },\n        \"borrower\": {\n            \"id\": 8,\n            \"username\": \"George Orwell\"\n        },\n        \"startDate\": \"2025-01-25\",\n        \"endDate\": \"2025-02-09\",\n        \"status\": \"Completed\"\n    },\n    {\n        \"id\": 7,\n        \"book\": {\n            \"id\": 23,\n            \"title\": \"The Haunted Manor\",\n            \"author\": \"Laura Brown\"\n        },\n        \"lender\": {\n            \"id\": 8,\n            \"username\": \"George Orwell\"\n        },\n        \"borrower\": {\n            \"id\": 2,\n            \"username\": \"Alice Green\"\n        },\n        \"startDate\": \"2025-01-30\",\n        \"endDate\": \"2025-02-14\",\n        \"status\": \"Completed\"\n    },\n    {\n        \"id\": 8,\n        \"book\": {\n            \"id\": 2,\n            \"title\": \"Galactic Wars\",\n            \"author\": \"Emily Carter\"\n        },\n        \"lender\": {\n            \"id\": 2,\n            \"username\": \"Alice Green\"\n        },\n        \"borrower\": {\n            \"id\": 4,\n            \"username\": \"Charlie Dock\"\n        },\n        \"startDate\": \"2025-02-01\",\n        \"endDate\": \"2025-02-16\",\n        \"status\": \"Completed\"\n    },\n    {\n        \"id\": 10,\n        \"book\": {\n            \"id\": 3,\n            \"title\": \"The Silent Killer\",\n            \"author\": \"Mark Johnson\"\n        },\n        \"lender\": {\n            \"id\": 2,\n            \"username\": \"Alice Green\"\n        },\n        \"borrower\": {\n            \"id\": 6,\n            \"username\": \"Ethan Hawk\"\n        },\n        \"startDate\": \"2025-02-10\",\n        \"endDate\": null,\n        \"status\": \"Active\"\n    },\n    {\n        \"id\": 11,\n        \"book\": {\n            \"id\": 10,\n            \"title\": \"Echoes of Tomorrow\",\n            \"author\": \"Robert Martin\"\n        },\n        \"lender\": {\n            \"id\": 4,\n            \"username\": \"Charlie Dock\"\n        },\n        \"borrower\": {\n            \"id\": 7,\n            \"username\": \"Fiona Shrek\"\n        },\n        \"startDate\": \"2025-02-12\",\n        \"endDate\": null,\n        \"status\": \"Active\"\n    },\n    {\n        \"id\": 12,\n        \"book\": {\n            \"id\": 16,\n            \"title\": \"A Parisian Affair\",\n            \"author\": \"Megan Hart\"\n        },\n        \"lender\": {\n            \"id\": 5,\n            \"username\": \"Diana Brown\"\n        },\n        \"borrower\": {\n            \"id\": 8,\n            \"username\": \"George Orwell\"\n        },\n        \"startDate\": \"2025-02-15\",\n        \"endDate\": null,\n        \"status\": \"Active\"\n    },\n    {\n        \"id\": 13,\n        \"book\": {\n            \"id\": 2,\n            \"title\": \"Galactic Wars\",\n            \"author\": \"Emily Carter\"\n        },\n        \"lender\": {\n            \"id\": 2,\n            \"username\": \"Alice Green\"\n        },\n        \"borrower\": {\n            \"id\": 2,\n            \"username\": \"Alice Green\"\n        },\n        \"startDate\": \"2025-09-02\",\n        \"endDate\": \"2025-09-03\",\n        \"status\": \"Active\"\n    },\n    {\n        \"id\": 14,\n        \"book\": {\n            \"id\": 4,\n            \"title\": \"The Last Pharaoh\",\n            \"author\": \"Wilbur Smith\"\n        },\n        \"lender\": {\n            \"id\": 2,\n            \"username\": \"Alice Green\"\n        },\n        \"borrower\": {\n            \"id\": 7,\n            \"username\": \"Fiona Shrek\"\n        },\n        \"startDate\": \"2025-09-02\",\n        \"endDate\": null,\n        \"status\": \"Active\"\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "Get loan by ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/loans/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"loans",
+								"1"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get loan by ID",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/loans/1",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"loans",
+										"1"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=31536000 ; includeSubDomains"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json;charset=UTF-8"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 03 Sep 2025 20:38:56 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 1,\n    \"book\": {\n        \"id\": 1,\n        \"title\": \"UPDATE A Book by API\",\n        \"author\": \"Anita Powell\"\n    },\n    \"lender\": {\n        \"id\": 2,\n        \"username\": \"Alice Green\"\n    },\n    \"borrower\": {\n        \"id\": 3,\n        \"username\": \"Bob Staples\"\n    },\n    \"startDate\": \"2025-01-01\",\n    \"endDate\": \"2025-01-15\",\n    \"status\": \"Completed\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Create loan",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{password}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{username}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "  {\n    \"book\": {\n      \"id\": 4\n    },\n    \"lender\": {\n      \"id\": 1\n    },\n    \"borrower\": {\n      \"id\": 4\n    },\n    \"startDate\": \"2025-09-03\",\n    \"endDate\": null,\n    \"status\": \"Active\"\n  }"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/loans?page=0&size=10",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"loans"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "0",
+									"description": "Page number (0-based)"
+								},
+								{
+									"key": "size",
+									"value": "10",
+									"description": "Number of items per page"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Create loan",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "  {\n    \"book\": {\n      \"id\": 12\n    },\n    \"lender\": {\n      \"id\": 4\n    },\n    \"borrower\": {\n      \"id\": 6\n    },\n    \"startDate\": \"2025-09-03\",\n    \"endDate\": null,\n    \"status\": \"Active\"\n  }"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/loans",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"loans"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "Text",
+							"header": [
+								{
+									"key": "Location",
+									"value": "https://localhost:8443/api/v1/loans/15"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=31536000 ; includeSubDomains"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json;charset=UTF-8"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 03 Sep 2025 20:34:31 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 15,\n    \"book\": {\n        \"id\": 12,\n        \"title\": \"The Night Visitor\",\n        \"author\": \"Dean Koontz\"\n    },\n    \"lender\": {\n        \"id\": 4,\n        \"username\": \"Charlie Dock\"\n    },\n    \"borrower\": {\n        \"id\": 6,\n        \"username\": \"Ethan Hawk\"\n    },\n    \"startDate\": \"2025-09-03\",\n    \"endDate\": null,\n    \"status\": \"Active\"\n}"
+						},
+						{
+							"name": "Create loan",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "  {\n    \"book\": {\n      \"id\": 6\n    },\n    \"lender\": {\n      \"id\": 3\n    },\n    \"borrower\": {\n      \"id\": 2\n    },\n    \"startDate\": \"2025-09-03\",\n    \"endDate\": null,\n    \"status\": \"Active\"\n  }"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/loans",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"loans"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "Text",
+							"header": [
+								{
+									"key": "Location",
+									"value": "https://localhost:8443/api/v1/loans/16"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=31536000 ; includeSubDomains"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json;charset=UTF-8"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 03 Sep 2025 20:35:45 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 16,\n    \"book\": {\n        \"id\": 6,\n        \"title\": \"The Cursed Woods\",\n        \"author\": \"Stephen King\"\n    },\n    \"lender\": {\n        \"id\": 3,\n        \"username\": \"Bob Staples\"\n    },\n    \"borrower\": {\n        \"id\": 2,\n        \"username\": \"Alice Green\"\n    },\n    \"startDate\": \"2025-09-03\",\n    \"endDate\": null,\n    \"status\": \"Active\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Update loan",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"lenderId\": 1,\n  \"borrowerId\": 2,\n  \"bookId\": 1,\n  \"startDate\": \"2024-09-04\",\n  \"endDate\": \"2024-09-25\",\n  \"status\": \"RETURNED\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/loans/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"loans",
+								"1"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Update loan",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"lenderId\": 3,\n  \"borrowerId\": 2,\n  \"bookId\": 6,\n  \"startDate\": \"2024-09-05\",\n  \"endDate\": \"2024-09-25\",\n  \"status\": \"Completed\"\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/loans/16",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"loans",
+										"16"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "Text",
+							"header": [
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=31536000 ; includeSubDomains"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json;charset=UTF-8"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 03 Sep 2025 20:37:57 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 16,\n    \"book\": {\n        \"id\": 6,\n        \"title\": \"The Cursed Woods\",\n        \"author\": \"Stephen King\"\n    },\n    \"lender\": {\n        \"id\": 3,\n        \"username\": \"Bob Staples\"\n    },\n    \"borrower\": {\n        \"id\": 2,\n        \"username\": \"Alice Green\"\n    },\n    \"startDate\": \"2024-09-05\",\n    \"endDate\": \"2024-09-25\",\n    \"status\": \"Completed\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete loan",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/loans/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"loans",
+								"1"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Delete loan",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/loans/16",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"loans",
+										"16"
+									]
+								}
+							},
+							"status": "No Content",
+							"code": 204,
+							"_postman_previewlanguage": "Text",
+							"header": [
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=31536000 ; includeSubDomains"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 03 Sep 2025 20:38:17 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "Get loans by lender",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/loans/lender/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"loans",
+								"lender",
+								"1"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get loans by lender",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/loans/lender/2",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"loans",
+										"lender",
+										"2"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "Text",
+							"header": [
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=31536000 ; includeSubDomains"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json;charset=UTF-8"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 03 Sep 2025 20:39:39 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"id\": 1,\n        \"book\": {\n            \"id\": 1,\n            \"title\": \"UPDATE A Book by API\",\n            \"author\": \"Anita Powell\"\n        },\n        \"lender\": {\n            \"id\": 2,\n            \"username\": \"Alice Green\"\n        },\n        \"borrower\": {\n            \"id\": 3,\n            \"username\": \"Bob Staples\"\n        },\n        \"startDate\": \"2025-01-01\",\n        \"endDate\": \"2025-01-15\",\n        \"status\": \"Completed\"\n    },\n    {\n        \"id\": 8,\n        \"book\": {\n            \"id\": 2,\n            \"title\": \"Galactic Wars\",\n            \"author\": \"Emily Carter\"\n        },\n        \"lender\": {\n            \"id\": 2,\n            \"username\": \"Alice Green\"\n        },\n        \"borrower\": {\n            \"id\": 4,\n            \"username\": \"Charlie Dock\"\n        },\n        \"startDate\": \"2025-02-01\",\n        \"endDate\": \"2025-02-16\",\n        \"status\": \"Completed\"\n    },\n    {\n        \"id\": 10,\n        \"book\": {\n            \"id\": 3,\n            \"title\": \"The Silent Killer\",\n            \"author\": \"Mark Johnson\"\n        },\n        \"lender\": {\n            \"id\": 2,\n            \"username\": \"Alice Green\"\n        },\n        \"borrower\": {\n            \"id\": 6,\n            \"username\": \"Ethan Hawk\"\n        },\n        \"startDate\": \"2025-02-10\",\n        \"endDate\": null,\n        \"status\": \"Active\"\n    },\n    {\n        \"id\": 13,\n        \"book\": {\n            \"id\": 2,\n            \"title\": \"Galactic Wars\",\n            \"author\": \"Emily Carter\"\n        },\n        \"lender\": {\n            \"id\": 2,\n            \"username\": \"Alice Green\"\n        },\n        \"borrower\": {\n            \"id\": 2,\n            \"username\": \"Alice Green\"\n        },\n        \"startDate\": \"2025-09-02\",\n        \"endDate\": \"2025-09-03\",\n        \"status\": \"Active\"\n    },\n    {\n        \"id\": 14,\n        \"book\": {\n            \"id\": 4,\n            \"title\": \"The Last Pharaoh\",\n            \"author\": \"Wilbur Smith\"\n        },\n        \"lender\": {\n            \"id\": 2,\n            \"username\": \"Alice Green\"\n        },\n        \"borrower\": {\n            \"id\": 7,\n            \"username\": \"Fiona Shrek\"\n        },\n        \"startDate\": \"2025-09-02\",\n        \"endDate\": null,\n        \"status\": \"Active\"\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "Get loans by borrower",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/loans/borrower/2",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"loans",
+								"borrower",
+								"2"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get loans by borrower",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/loans/borrower/5",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"loans",
+										"borrower",
+										"5"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "Text",
+							"header": [
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=31536000 ; includeSubDomains"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json;charset=UTF-8"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 03 Sep 2025 20:39:49 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"id\": 3,\n        \"book\": {\n            \"id\": 9,\n            \"title\": \"Whispers in the Dark\",\n            \"author\": \"Angela Carter\"\n        },\n        \"lender\": {\n            \"id\": 4,\n            \"username\": \"Charlie Dock\"\n        },\n        \"borrower\": {\n            \"id\": 5,\n            \"username\": \"Diana Brown\"\n        },\n        \"startDate\": \"2025-01-10\",\n        \"endDate\": \"2025-01-25\",\n        \"status\": \"Completed\"\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "Get loans by book",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/loans/book/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"loans",
+								"book",
+								"1"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get loans by book",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/loans/book/2",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"loans",
+										"book",
+										"2"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "Text",
+							"header": [
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=31536000 ; includeSubDomains"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json;charset=UTF-8"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 03 Sep 2025 20:40:21 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"id\": 8,\n        \"book\": {\n            \"id\": 2,\n            \"title\": \"Galactic Wars\",\n            \"author\": \"Emily Carter\"\n        },\n        \"lender\": {\n            \"id\": 2,\n            \"username\": \"Alice Green\"\n        },\n        \"borrower\": {\n            \"id\": 4,\n            \"username\": \"Charlie Dock\"\n        },\n        \"startDate\": \"2025-02-01\",\n        \"endDate\": \"2025-02-16\",\n        \"status\": \"Completed\"\n    },\n    {\n        \"id\": 13,\n        \"book\": {\n            \"id\": 2,\n            \"title\": \"Galactic Wars\",\n            \"author\": \"Emily Carter\"\n        },\n        \"lender\": {\n            \"id\": 2,\n            \"username\": \"Alice Green\"\n        },\n        \"borrower\": {\n            \"id\": 2,\n            \"username\": \"Alice Green\"\n        },\n        \"startDate\": \"2025-09-02\",\n        \"endDate\": \"2025-09-03\",\n        \"status\": \"Active\"\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "Get valid borrowers (Web API)",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "pass",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin@example.com",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/loans/valid-borrowers",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"loans",
+								"valid-borrowers"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get valid borrowers (Web API)",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/loans/valid-borrowers",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"loans",
+										"valid-borrowers"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "Text",
+							"header": [
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=31536000 ; includeSubDomains"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json;charset=UTF-8"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 03 Sep 2025 20:40:53 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"id\": 2,\n        \"username\": \"Alice Green\",\n        \"email\": \"alice@example.com\",\n        \"encodedPassword\": \"$2a$10$0TsgWijCuZQk3nLDOGWiA.t3PgYMyPEEMNBBHYd7EOropUFHNEaXu\",\n        \"role\": \"ROLE_USER\",\n        \"password\": \"$2a$10$0TsgWijCuZQk3nLDOGWiA.t3PgYMyPEEMNBBHYd7EOropUFHNEaXu\",\n        \"roles\": [\n            \"USER\"\n        ]\n    },\n    {\n        \"id\": 3,\n        \"username\": \"Bob Staples\",\n        \"email\": \"bob@example.com\",\n        \"encodedPassword\": \"$2a$10$l7ZX7Zp30zX4fXWmWmNtpeeFnwyViCvMnLmWIMA3P1FQ1v6gRlIHm\",\n        \"role\": \"ROLE_USER\",\n        \"password\": \"$2a$10$l7ZX7Zp30zX4fXWmWmNtpeeFnwyViCvMnLmWIMA3P1FQ1v6gRlIHm\",\n        \"roles\": [\n            \"USER\"\n        ]\n    },\n    {\n        \"id\": 4,\n        \"username\": \"Charlie Dock\",\n        \"email\": \"charlie@example.com\",\n        \"encodedPassword\": \"$2a$10$QyNWJsqd/jvdhC9/EBIQWuMOaxAE4KcAOQVJop5eK6vfJzue7ozf.\",\n        \"role\": \"ROLE_USER\",\n        \"password\": \"$2a$10$QyNWJsqd/jvdhC9/EBIQWuMOaxAE4KcAOQVJop5eK6vfJzue7ozf.\",\n        \"roles\": [\n            \"USER\"\n        ]\n    },\n    {\n        \"id\": 5,\n        \"username\": \"Diana Brown\",\n        \"email\": \"diana@example.com\",\n        \"encodedPassword\": \"$2a$10$4/dIbj2yjAeIKIww8yzYUO17RoN9t0JQFv51RSovpS1SKVT2kTlm.\",\n        \"role\": \"ROLE_USER\",\n        \"password\": \"$2a$10$4/dIbj2yjAeIKIww8yzYUO17RoN9t0JQFv51RSovpS1SKVT2kTlm.\",\n        \"roles\": [\n            \"USER\"\n        ]\n    },\n    {\n        \"id\": 6,\n        \"username\": \"Ethan Hawk\",\n        \"email\": \"ethan@example.com\",\n        \"encodedPassword\": \"$2a$10$xCc./AMVReNpSz77Cn4KwOcG68uZ35KT919zB38av5lu9IZVOMVOK\",\n        \"role\": \"ROLE_USER\",\n        \"password\": \"$2a$10$xCc./AMVReNpSz77Cn4KwOcG68uZ35KT919zB38av5lu9IZVOMVOK\",\n        \"roles\": [\n            \"USER\"\n        ]\n    },\n    {\n        \"id\": 7,\n        \"username\": \"Fiona Shrek\",\n        \"email\": \"fiona@example.com\",\n        \"encodedPassword\": \"$2a$10$knpPubO7OY3S5faQjmZ66OLErh012yKuvgLfzgmNirI79nU35tpaG\",\n        \"role\": \"ROLE_USER\",\n        \"password\": \"$2a$10$knpPubO7OY3S5faQjmZ66OLErh012yKuvgLfzgmNirI79nU35tpaG\",\n        \"roles\": [\n            \"USER\"\n        ]\n    },\n    {\n        \"id\": 8,\n        \"username\": \"George Orwell\",\n        \"email\": \"george@example.com\",\n        \"encodedPassword\": \"$2a$10$8wfs52Is8AMkqTVYjEQ/4OA1Dmnhkg93QdOFuVh5qFfGE06HM1Wnq\",\n        \"role\": \"ROLE_USER\",\n        \"password\": \"$2a$10$8wfs52Is8AMkqTVYjEQ/4OA1Dmnhkg93QdOFuVh5qFfGE06HM1Wnq\",\n        \"roles\": [\n            \"USER\"\n        ]\n    },\n    {\n        \"id\": 11,\n        \"username\": \"testuser123\",\n        \"email\": \"testuser123@example.com\",\n        \"encodedPassword\": \"$2a$10$DkxRTJZm3nH9tFxkVAvaS.oaslFZl8y/y.V6VDgtP1HzAFzxT45J2\",\n        \"role\": \"ROLE_USER\",\n        \"password\": \"$2a$10$DkxRTJZm3nH9tFxkVAvaS.oaslFZl8y/y.V6VDgtP1HzAFzxT45J2\",\n        \"roles\": [\n            \"USER\"\n        ]\n    },\n    {\n        \"id\": 12,\n        \"username\": \"testuser123\",\n        \"email\": \"testuser123@example.com\",\n        \"encodedPassword\": \"$2a$10$.RVcySdI/UKvOwxP7ETOLu5pteN03WmX9arh1KQkQX.z386bvVaQy\",\n        \"role\": \"ROLE_USER\",\n        \"password\": \"$2a$10$.RVcySdI/UKvOwxP7ETOLu5pteN03WmX9arh1KQkQX.z386bvVaQy\",\n        \"roles\": [\n            \"USER\"\n        ]\n    },\n    {\n        \"id\": 13,\n        \"username\": \"updateusername\",\n        \"email\": \"update@example.com\",\n        \"encodedPassword\": \"$2a$10$aGiL5/8R77Iy9EZzJsfROO2AHORK8MICLG5jI5gwJd9pesmoPgZMe\",\n        \"role\": \"ROLE_USER\",\n        \"password\": \"$2a$10$aGiL5/8R77Iy9EZzJsfROO2AHORK8MICLG5jI5gwJd9pesmoPgZMe\",\n        \"roles\": [\n            \"USER\"\n        ]\n    }\n]"
+						}
+					]
+				}
+			],
+			"auth": {
+				"type": "basic",
+				"basic": [
+					{
+						"key": "password",
+						"value": "{{password}}",
+						"type": "string"
+					},
+					{
+						"key": "username",
+						"value": "{{username}}",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:8443",
+			"type": "string"
+		}
+	]
+}

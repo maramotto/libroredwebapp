@@ -1,0 +1,65 @@
+{{> header}}
+
+<div class="container mt-5">
+    <h2 class="text-center">
+        {{#isAdmin}}Manage Books{{/isAdmin}}
+        {{^isAdmin}}My Books{{/isAdmin}}
+    </h2>
+
+    <!-- Create Book Button -->
+    <a href="/books/create" class="btn btn-primary mb-3">Create Book</a>
+
+    <div class="row">
+        {{#books}}
+        <div class="col-md-4 mb-4">
+            <div class="card shadow-sm">
+                <img src="{{coverPicUrl}}" class="card-img-top" alt="{{title}}">
+
+                <div class="card-body">
+                    <h5 class="card-title">{{title}}</h5>
+                    <p class="card-text"><strong>Author:</strong> {{author}}</p>
+                    <p class="card-text"><strong>Genre:</strong> {{genre}}</p>
+                    <p class="card-text">{{description}}</p>
+
+                    {{#isCurrentlyOnLoan}}
+                    <p class="text-danger"><strong>Currently on Loan</strong></p>
+                    {{/isCurrentlyOnLoan}}
+
+                    <!-- Action Buttons -->
+                    <div class="d-flex justify-content-between">
+                        <a href="/books/edit/{{id}}" class="btn btn-warning btn-sm">Edit</a>
+                        <form action="/books/delete/{{id}}" method="post" class="d-inline">
+                            <input type="hidden" name="_csrf" value="{{_csrf.token}}">
+                            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        {{/books}}
+    </div>
+
+    <!-- Message if No Books Exist -->
+    {{^books}}
+    <p class="text-center text-muted">No books available.</p>
+    {{/books}}
+
+    <div class="row-cols-1">
+        <!-- Back button for Admin -->
+        {{#isAdmin}}
+        <div class="d-flex justify-content-end mt-3">
+            <a href="/admin" class="btn btn-secondary mt-3">Back</a>
+        </div>
+        {{/isAdmin}}
+
+        <!-- Back button for USER -->
+        {{^isAdmin}}
+        <div class="d-flex justify-content-end mt-3">
+            <a href="/myaccount" class="btn btn-secondary mt-3">Back</a>
+        </div>
+        {{/isAdmin}}
+    </div>
+</div>
+
+{{> footer}}

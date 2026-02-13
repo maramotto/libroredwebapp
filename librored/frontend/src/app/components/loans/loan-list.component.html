@@ -1,0 +1,83 @@
+<div class="container mt-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>{{ isAdmin ? 'All Loans' : 'My Loans' }}</h2>
+        <button class="btn btn-primary" (click)="createNewLoan()">
+            <i class="fa fa-plus"></i> Create New Loan
+        </button>
+    </div>
+
+    <!-- Loading Spinner -->
+    <div *ngIf="loading" class="text-center">
+        <div class="spinner-border" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+        <p>Loading loans...</p>
+    </div>
+
+    <!-- Error Message -->
+    <div *ngIf="errorMessage" class="alert alert-danger" role="alert">
+        {{ errorMessage }}
+    </div>
+
+    <!-- Loans Table -->
+    <div *ngIf="!loading && !errorMessage">
+        <div *ngIf="loans.length === 0" class="alert alert-info">
+            <h5>No loans found</h5>
+            <p>{{ isAdmin ? 'There are no loans in the system.' : 'You haven\'t created any loans yet.' }}</p>
+            <button class="btn btn-primary" (click)="createNewLoan()">Create Your First Loan</button>
+        </div>
+
+        <div *ngIf="loans.length > 0" class="table-responsive">
+            <table class="table table-striped table-hover">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Book</th>
+                        <th>Lender</th>
+                        <th>Borrower</th>
+                        <th>Start Date</th>
+                        <th>End Date</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let loan of loans" [class.table-warning]="isOverdue(loan)">
+                        <td>
+                            <strong>{{ loan.bookTitle }}</strong>
+                            <div *ngIf="isOverdue(loan)" class="text-danger small">
+                                <i class="fa fa-exclamation-triangle"></i> Overdue
+                            </div>
+                        </td>
+                        <td>{{ loan.lenderUsername }}</td>
+                        <td>{{ loan.borrowerUsername }}</td>
+                        <td>{{ formatDate(loan.startDate) }}</td>
+                        <td>{{ formatDate(loan.endDate || '') }}</td>
+                        <td>
+                            <span [class]="getStatusClass(loan.status)">
+                                {{ loan.status }}
+                            </span>
+                        </td>
+                        <td>
+                            <div class="btn-group btn-group-sm" role="group">
+                                <button 
+                                    *ngIf="canEditLoan(loan)"
+                                    class="btn btn-outline-primary btn-sm" 
+                                    (click)="editLoan(loan)"
+                                    title="Edit Loan">
+                                    <i class="fa fa-edit"></i>
+                                </button>
+                                <button 
+                                    *ngIf="canDeleteLoan(loan)"
+                                    class="btn btn-outline-danger btn-sm" 
+                                    (click)="deleteLoan(loan)"
+                                    title="Delete Loan">
+                                    <i class="fa fa-trash"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

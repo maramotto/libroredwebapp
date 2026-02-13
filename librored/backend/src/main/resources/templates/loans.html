@@ -1,0 +1,83 @@
+{{> header}}
+
+<div class="container mt-5">
+    <h2 class="text-center">
+        {{#isAdmin}}Manage Loans{{/isAdmin}}
+        {{^isAdmin}}My Loans{{/isAdmin}}
+    </h2>
+
+    <!-- Create Loan Button -->
+    <a href="/loans/create" class="btn btn-primary mb-3">Create Loan</a>
+
+    <!-- Success and Error Messages -->
+    {{#message}}
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        {{message}}
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+    {{/message}}
+    
+    {{#error}}
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        {{error}}
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+    {{/error}}
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Book</th>
+            <th>Lender</th>
+            <th>Borrower</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {{#loans}}
+        <tr>
+            <td>{{book.title}}</td>
+            <td>{{lender.username}}</td>
+            <td>{{borrower.username}}</td>
+            <td>{{startDate}}</td>
+            <td>
+                {{#endDate}}{{endDate}}{{/endDate}}
+                {{^endDate}}Not Set{{/endDate}}
+            </td>
+            <td>{{status}}</td>
+            <td>
+                <!-- EDIT -->
+                <a href="/loans/edit/{{id}}" class="btn btn-warning btn-sm">Edit</a>
+                
+                <!-- DELETE - Admin can delete any loan, Regular users can delete their own loans -->
+                <form action="/loans/delete/{{id}}" method="post" style="display: inline;" 
+                      onsubmit="return confirm('Are you sure you want to delete this loan? This action cannot be undone.');">
+                    <input type="hidden" name="_csrf" value="{{_csrf.token}}">
+                    <button type="submit" class="btn btn-danger btn-sm ms-1">Delete</button>
+                </form>
+            </td>
+        </tr>
+        {{/loans}}
+        </tbody>
+    </table>
+    <div class="row-cols-1">
+        <!-- Back button for Admin -->
+        {{#isAdmin}}
+        <div class="d-flex justify-content-end mt-3">
+            <a href="/admin" class="btn btn-secondary mt-3">Back</a>
+        </div>
+        {{/isAdmin}}
+
+        <!-- Back button for USER -->
+        {{^isAdmin}}
+        <div class="d-flex justify-content-end mt-3">
+            <a href="/myaccount" class="btn btn-secondary mt-3">Back</a>
+        </div>
+        {{/isAdmin}}
+    </div>
+</div>
+
+{{> footer}}

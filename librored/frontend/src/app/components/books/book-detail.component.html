@@ -1,0 +1,47 @@
+<div class="container mt-5">
+    <!-- Loading Spinner -->
+    <div *ngIf="loading" class="text-center">
+        <div class="spinner-border" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+        <p>Loading book...</p>
+    </div>
+
+    <!-- Error Message -->
+    <div *ngIf="errorMessage" class="alert alert-danger" role="alert">
+        {{ errorMessage }}
+        <button type="button" class="btn btn-secondary mt-2" (click)="goBack()">Back to Books</button>
+    </div>
+
+    <!-- Book Details - Simple Layout matching MVC -->
+    <div *ngIf="!loading && !errorMessage && book">
+        <h2>{{ book.title }}</h2>
+        
+        <div class="row mt-4">
+            <div class="col-md-4">
+                <img [src]="getImageUrl()" class="img-fluid" [alt]="book.title">
+            </div>
+            <div class="col-md-8">
+                <p><strong>Description:</strong></p>
+                <p>{{ book.description }}</p>
+                
+                <!-- Shops -->
+                <div *ngIf="book.shops && book.shops.length > 0">
+                    <p><strong>Available in shops:</strong></p>
+                    <ul>
+                        <li *ngFor="let shop of book.shops">
+                            {{ shop.name }} - {{ shop.address }}
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Action buttons -->
+                <div class="mt-3">
+                    <button type="button" class="btn btn-warning me-2" (click)="editBook()">Edit</button>
+                    <button type="button" class="btn btn-danger me-2" (click)="deleteBook()">Remove</button>
+                    <button type="button" class="btn btn-secondary" (click)="goBack()">Back to all books</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
