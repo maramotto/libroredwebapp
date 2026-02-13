@@ -1,0 +1,222 @@
+{{>header}}
+
+<div class="container mt-5">
+    <h2 class="text-center">Create Loan</h2>
+    <form action="/loans/create" method="post">
+        <input type="hidden" name="_csrf" value="{{_csrf.token}}">
+        <!-- Lender Selection (Only for Admins) -->
+        {{#isAdmin}}
+        <div class="form-group">
+            <label>Lender</label>
+            <select name="lenderId" id="lenderSelect" class="form-control">
+                <option value="" disabled selected>-- Select a Lender --</option>
+                {{#users}}
+                <option value="{{id}}">{{username}}</option>
+                {{/users}}
+            </select>
+        </div>
+        {{/isAdmin}}
+
+        <!-- Hidden Lender Field (For Users) -->
+        {{^isAdmin}}
+        <input type="hidden" name="lenderId" value="{{userId}}">
+        {{/isAdmin}}
+
+        <!-- Book Selection -->
+        <div class="form-group">
+            <label>Book</label>
+            <select name="bookId" id="bookSelect" class="form-control" required>
+                <option value="" disabled selected>-- Select a Book --</option>
+                {{#books}}
+                <option value="{{id}}">{{title}}</option>
+                {{/books}}
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Borrower</label>
+            <select name="borrowerId" id="borrowerSelect" class="form-control" required>
+                <option value="" disabled selected>-- Select a Borrower --</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Start Date</label>
+            <input type="date" name="startDate" id="startDate" class="form-control" required>
+        </div>
+
+        <div class="form-group">
+            <label>End Date</label>
+            <input type="date" name="endDate" id="endDate" class="form-control">
+        </div>
+
+        <div class="form-group">
+            <label>Status</label>
+            <select name="status" class="form-control">
+                <option value="Active">Active</option>
+                <option value="Completed">Completed</option>
+            </select>
+        </div>
+        {{#error}}
+        <div class="alert alert-danger">{{error}}</div>
+        {{/error}}
+        
+        {{#message}}
+        <div class="alert alert-success">{{message}}</div>
+        {{/message}}
+
+        <button type="submit" class="btn btn-success">Create Loan</button>
+    </form>
+    <a href="/loans" class="btn btn-secondary">Cancel</a>
+</div>
+
+<script>
+    document.getElementById("lenderSelect").addEventListener("change", function () {
+        var lenderId = this.value;
+        var bookSelect = document.getElementById("bookSelect");
+
+        if (lenderId) {
+            fetch("/loans/books/" + lenderId)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! Status: ${response.status}`);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    bookSelect.innerHTML = "<option value=''>-- Select Available Book --</option>";
+                    if (data.length === 0) {
+                        bookSelect.innerHTML += "<option value='' disabled>No available books</option>";
+                        bookSelect.disabled = true;
+                    } else {
+                        data.forEach(book => {
+                            bookSelect.innerHTML += `<option value="${book.id}">${book.title}</option>`;
+                        });
+                        bookSelect.disabled = false;
+                    }
+                })
+                .catch(error => console.error("Error loading books:", error));
+        } else {
+            bookSelect.innerHTML = "<option value=''>-- Select a Lender First --</option>";
+            bookSelect.disabled = true;
+        }
+    });
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        fetch("/api/loans/valid-borrowers")  // Corrected API path
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                const borrowerSelect = document.getElementById("borrowerSelect");
+                borrowerSelect.innerHTML = "<option value='' disabled selected>-- Select a Borrower --</option>";
+
+                if (data.length === 0) {
+                    borrowerSelect.innerHTML += "<option value='' disabled>No available borrowers</option>";
+                    borrowerSelect.disabled = true;
+                } else {
+                    data.forEach(user => {
+                        borrowerSelect.innerHTML += `<option value="${user.id}">${user.username}</option>`;
+                    });
+                    borrowerSelect.disabled = false;
+                }
+            })
+            .catch(error => console.error("Error loading borrowers:", error));
+    });
+
+    // Date validation and form validation
+    document.addEventListener("DOMContentLoaded", function () {
+        const form = document.querySelector("form");
+        const startDateInput = document.getElementById("startDate");
+        const endDateInput = document.getElementById("endDate");
+        const borrowerSelect = document.getElementById("borrowerSelect");
+        
+        // Set minimum date to today
+        const today = new Date().toISOString().split('T')[0];
+        startDateInput.min = today;
+        endDateInput.min = today;
+
+        // Validate dates on change
+        startDateInput.addEventListener("change", function() {
+            const startDate = new Date(this.value);
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+
+            if (startDate < today) {
+                alert("Start date must be today or in the future.");
+                this.value = "";
+            } else {
+                // Update end date minimum
+                endDateInput.min = this.value;
+                
+                // Check if end date needs to be updated
+                if (endDateInput.value && new Date(endDateInput.value) <= startDate) {
+                    alert("End date must be after start date.");
+                    endDateInput.value = "";
+                }
+            }
+        });
+
+        endDateInput.addEventListener("change", function() {
+            const endDate = new Date(this.value);
+            const startDate = new Date(startDateInput.value);
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+
+            if (endDate <= today) {
+                alert("End date must be in the future.");
+                this.value = "";
+            } else if (startDateInput.value && endDate <= startDate) {
+                alert("End date must be after start date.");
+                this.value = "";
+            }
+        });
+
+        // Form submission validation
+        form.addEventListener("submit", function(event) {
+            const lenderSelect = document.getElementById("lenderSelect");
+            const bookSelect = document.getElementById("bookSelect");
+            
+            // Check if lender and borrower are the same (for admin)
+            if (lenderSelect && lenderSelect.value === borrowerSelect.value) {
+                event.preventDefault();
+                alert("Lender and borrower cannot be the same person.");
+                return false;
+            }
+
+            // Date validations
+            const startDate = new Date(startDateInput.value);
+            const endDate = endDateInput.value ? new Date(endDateInput.value) : null;
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+
+            if (startDate < today) {
+                event.preventDefault();
+                alert("Start date must be today or in the future.");
+                return false;
+            }
+
+            if (endDate && endDate <= today) {
+                event.preventDefault();
+                alert("End date must be in the future.");
+                return false;
+            }
+
+            if (endDate && endDate <= startDate) {
+                event.preventDefault();
+                alert("End date must be after start date.");
+                return false;
+            }
+
+            return true;
+        });
+    });
+</script>
+
+
+{{>footer}}

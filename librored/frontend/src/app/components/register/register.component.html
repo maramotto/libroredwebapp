@@ -1,0 +1,96 @@
+<div class="container">
+  <h2>User Register</h2>
+  <form (ngSubmit)="onSubmit()" #registerForm="ngForm">
+    <div class="form-group mb-3">
+      <label for="username">Username</label>
+      <input
+        type="text"
+        id="username"
+        name="username"
+        class="form-control"
+        [(ngModel)]="username"
+        required>
+    </div>
+    <div class="form-group mb-3">
+      <label for="email">Email</label>
+      <input
+        type="email"
+        id="email"
+        name="email"
+        class="form-control"
+        [(ngModel)]="email"
+        required>
+    </div>
+    <div class="form-group mb-3">
+      <label for="encodedPassword">Password</label>
+      <input
+        type="password"
+        id="encodedPassword"
+        name="encodedPassword"
+        class="form-control"
+        [(ngModel)]="encodedPassword"
+        required>
+    </div>
+    <div class="form-group mb-3">
+      <label for="confirmPassword">Confirm Password</label>
+      <input
+        type="password"
+        id="confirmPassword"
+        name="confirmPassword"
+        class="form-control"
+        [(ngModel)]="confirmPassword"
+        required>
+    </div>
+    <button
+      type="submit"
+      class="btn btn-primary"
+      [disabled]="!registerForm.form.valid || isSubmitting">
+      <span *ngIf="isSubmitting" class="spinner-border spinner-border-sm me-2" role="status"></span>
+      {{ isSubmitting ? 'Registering...' : 'Register' }}
+    </button>
+  </form>
+
+  <div class="text-center mt-3">
+    <p>Already have an account?
+      <a href="#" (click)="goToLogin()" class="text-decoration-none">Login here</a>
+    </p>
+  </div>
+</div>
+
+<!-- Error Modal -->
+<div class="modal" [class.show]="showErrorModal" [style.display]="showErrorModal ? 'block' : 'none'" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Registration Error</h5>
+        <button type="button" class="btn-close" (click)="closeErrorModal()"></button>
+      </div>
+      <div class="modal-body">
+        <p>{{ errorMessage }}</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" (click)="closeErrorModal()">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal-backdrop" [class.show]="showErrorModal" *ngIf="showErrorModal"></div>
+
+<!-- Success Modal -->
+<div class="modal" [class.show]="showSuccessModal" [style.display]="showSuccessModal ? 'block' : 'none'" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Registration Successful</h5>
+        <button type="button" class="btn-close" (click)="closeSuccessModal()"></button>
+      </div>
+      <div class="modal-body">
+        <p>{{ successMessage }}</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" (click)="closeSuccessModal()">Continue to Login</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal-backdrop" [class.show]="showSuccessModal" *ngIf="showSuccessModal"></div>

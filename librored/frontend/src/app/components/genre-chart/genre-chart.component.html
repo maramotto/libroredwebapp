@@ -1,0 +1,27 @@
+<!-- Books per Genre Graph Section -->
+<div class="graph">
+    <div class="fluid-container">
+        <div class="row">
+            <div class="col-12">
+                <!-- Loading Spinner -->
+                <div *ngIf="loading" class="text-center">
+                    <div class="spinner-border" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                    <p>Loading genre statistics...</p>
+                </div>
+
+                <!-- Error Message -->
+                <div *ngIf="errorMessage" class="alert alert-danger" role="alert">
+                    {{ errorMessage }}
+                    <button type="button" class="btn btn-link" (click)="retryLoad()">Try Again</button>
+                </div>
+
+                <!-- Chart Canvas -->
+                <div class="chart-container">
+                    <canvas #chartCanvas id="booksChart" [style.display]="loading || errorMessage ? 'none' : 'block'"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,83 @@
+{{> header}}
+
+<div class="container mt-5">
+    <h2 class="text-center">Edit Book</h2>
+    <form action="/books/edit/{{book.id}}" method="post" enctype="multipart/form-data">
+        <input type="hidden" name="_csrf" value="{{_csrf.token}}">
+        <div class="form-group">
+            <label>Title</label>
+            <p>Current: <strong>{{book.title}}</strong></p>
+            <input type="text" name="title" class="form-control" value="{{book.title}}">
+        </div>
+
+        <div class="form-group">
+            <label>Author</label>
+            <p>Current: <strong>{{book.author}}</strong></p>
+            <input type="text" name="author" class="form-control" value="{{book.author}}">
+        </div>
+
+        <div class="form-group">
+            <label>Cover Picture</label>
+            <p>Current:</p>
+            <img src="{{book.coverPicUrl}}" alt="Book Cover" style="max-height: 150px;">
+            <input type="hidden" name="currentCover" value="{{book.coverPic}}">
+            <input type="file" id="coverUpload" name="coverPic" class="form-control">
+            <button type="button" id="uploadBtn" class="btn btn-secondary mt-2">Upload from Local</button>
+        </div>
+
+        <div class="form-group">
+            <label>Description</label>
+            <p>Current: <strong>{{book.description}}</strong></p>
+            <textarea name="description" class="form-control">{{book.description}}</textarea>
+        </div>
+
+        <div class="form-group">
+            <label>Genre</label>
+            <select name="genre" class="form-control" required>
+                <option value="" disabled>Select a Genre</option>
+                {{#genreList}}
+                <option value="{{this}}" {{#selectedGenre}}{{this}}{{/selectedGenre}}>{{this}}</option>
+                {{/genreList}}
+            </select>
+        </div>
+
+
+        <!--  Owner Selection (Only for Admins) -->
+        {{#isAdmin}}
+        <div class="form-group">
+            <label>Owner</label>
+            <select name="ownerId" class="form-control">
+                <option value="{{book.owner.id}}" selected>{{book.owner.username}}</option>
+                {{#users}}
+                <option value="{{id}}">{{username}}</option>
+                {{/users}}
+            </select>
+        </div>
+        {{/isAdmin}}
+
+        <!--  Hidden Owner Field (For Users) -->
+        {{^isAdmin}}
+        <input type="hidden" name="ownerId" value="{{book.owner.id}}">
+        {{/isAdmin}}
+
+
+        <button type="submit" class="btn btn-success mt-3">Update Book</button>
+        <a href="/books" class="btn btn-secondary mt-3">Cancel</a>
+    </form>
+</div>
+
+<script>
+    document.getElementById('uploadBtn').addEventListener('click', function () {
+        document.getElementById('coverUpload').click();
+    });
+
+    document.getElementById('coverUpload').addEventListener('change', function (event) {
+        const file = event.target.files[0];
+        if (file) {
+            alert("Selected file: " + file.name);
+        }
+    });
+</script>
+
+
+{{> footer}}

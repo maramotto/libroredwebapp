@@ -1,0 +1,89 @@
+
+@startuml
+
+' Define Entities with Attributes
+class User {
+  - Long id
+  - String username
+  - String email
+  - String encodedPassword
+  - Role role
+}
+
+class Loan {
+  - Long id
+  - LocalDate loanDate
+  - LocalDate returnDate
+  - boolean returned
+}
+
+class Book {
+  - Long id
+  - String title
+  - String author
+  - String description
+}
+
+' Define relationships between entities
+User "1" -- "*" Loan : borrows
+Book "1" -- "*" Loan : is borrowed in
+
+' Define repositories
+class UserRepository
+class BookRepository
+class LoanRepository
+
+UserRepository --> User
+BookRepository --> Book
+LoanRepository --> Loan
+
+' Define services
+class UserService
+class BookService
+class LoanService
+
+UserService --> UserRepository
+BookService --> BookRepository
+LoanService --> LoanRepository
+
+' Define controllers
+class UserController
+class BookController
+class LoanController
+class BookRestController
+class LoanRestController
+class UserRestController
+class LoginWebController
+class PostLoginController
+class GlobalModelAttributes
+class AdminController
+class CustomErrorController
+
+UserController --> UserService
+BookController --> BookService
+LoanController --> LoanService
+BookRestController --> BookService
+LoanRestController --> LoanService
+UserRestController --> UserService
+LoginWebController --> UserService
+PostLoginController --> UserService
+AdminController --> UserService
+GlobalModelAttributes --> UserService
+CustomErrorController --> UserService
+
+' Security Configuration
+class SecurityConfig
+class RepositoryUserDetailsService
+class CSRFHandlerConfiguration
+
+SecurityConfig --> RepositoryUserDetailsService
+RepositoryUserDetailsService --> UserRepository
+CSRFHandlerConfiguration --> SecurityConfig
+
+' Database Initializer
+class DatabaseInitializer
+DatabaseInitializer --> UserRepository
+DatabaseInitializer --> BookRepository
+DatabaseInitializer --> LoanRepository
+
+@enduml

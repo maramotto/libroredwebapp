@@ -1,0 +1,179 @@
+<div class="container mt-5">
+    <!-- Loading Spinner -->
+    <div *ngIf="loading" class="text-center">
+        <div class="spinner-border" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+        <p>Loading loan...</p>
+    </div>
+
+    <!-- Form -->
+    <div *ngIf="!loading">
+        <h2 class="text-center">{{ isEditMode ? 'Edit Loan' : 'Create Loan' }}</h2>
+
+        <!-- Success Message -->
+        <div *ngIf="successMessage" class="alert alert-success" role="alert">
+            {{ successMessage }}
+        </div>
+
+        <!-- Error Message -->
+        <div *ngIf="errorMessage" class="alert alert-danger" role="alert">
+            {{ errorMessage }}
+        </div>
+
+        <form (ngSubmit)="onSubmit()" #loanForm="ngForm">
+            <!-- Lender Selection (Admin only) -->
+            <div *ngIf="!isUserMode" class="form-group mb-3">
+                <label for="lender">Lender *</label>
+                <select 
+                    id="lender"
+                    name="lender" 
+                    class="form-control" 
+                    [(ngModel)]="loanForm.lenderId"
+                    (ngModelChange)="onLenderChange()"
+                    required
+                    #lender="ngModel">
+                    <option value="0">-- Select Lender --</option>
+                    <option *ngFor="let user of availableUsers" [value]="user.id">
+                        {{ getUserDisplayName(user) }}
+                    </option>
+                </select>
+                <div *ngIf="lender.invalid && lender.touched" class="text-danger">
+                    Lender is required
+                </div>
+            </div>
+
+            <!-- Lender Display (User Mode) -->
+            <div *ngIf="isUserMode && currentUser" class="form-group mb-3">
+                <label>Lender</label>
+                <div class="form-control-plaintext bg-light p-2 rounded">
+                    <strong>{{currentUser.username}}</strong> (You)
+                </div>
+            </div>
+
+            <!-- Book Selection -->
+            <div class="form-group mb-3">
+                <label for="book">Book *</label>
+                <select 
+                    id="book"
+                    name="book" 
+                    class="form-control" 
+                    [(ngModel)]="loanForm.bookId"
+                    required
+                    #book="ngModel"
+                    [disabled]="availableBooks.length === 0">
+                    <option value="0">-- Select Book --</option>
+                    <option *ngFor="let bookOption of availableBooks" [value]="bookOption.id">
+                        {{ bookOption.title }}
+                    </option>
+                </select>
+                <div *ngIf="book.invalid && book.touched" class="text-danger">
+                    Book is required
+                </div>
+                <div *ngIf="availableBooks.length === 0 && loanForm.lenderId > 0" class="text-muted small">
+                    No books available for the selected lender
+                </div>
+            </div>
+
+            <!-- Borrower Selection -->
+            <div class="form-group mb-3">
+                <label for="borrower">Borrower *</label>
+                <select 
+                    id="borrower"
+                    name="borrower" 
+                    class="form-control" 
+                    [(ngModel)]="loanForm.borrowerId"
+                    required
+                    #borrower="ngModel">
+                    <option value="0">-- Select Borrower --</option>
+                    <option *ngFor="let user of availableUsers" 
+                            [value]="user.id"
+                            [disabled]="user.id === loanForm.lenderId">
+                        {{ getUserDisplayName(user) }}
+                    </option>
+                </select>
+                <div *ngIf="borrower.invalid && borrower.touched" class="text-danger">
+                    Borrower is required
+                </div>
+            </div>
+
+            <!-- Start Date -->
+            <div class="form-group mb-3">
+                <label for="startDate">Start Date *</label>
+                <input 
+                    type="date" 
+                    id="startDate"
+                    name="startDate" 
+                    class="form-control" 
+                    [(ngModel)]="loanForm.startDate"
+                    required
+                    #startDate="ngModel">
+                <div *ngIf="startDate.invalid && startDate.touched" class="text-danger">
+                    Start date is required
+                </div>
+            </div>
+
+            <!-- End Date -->
+            <div class="form-group mb-3">
+                <label for="endDate">End Date (Optional)</label>
+                <input 
+                    type="date" 
+                    id="endDate"
+                    name="endDate" 
+                    class="form-control" 
+                    [(ngModel)]="loanForm.endDate"
+                    #endDate="ngModel">
+                <small class="text-muted">Leave empty for indefinite loan</small>
+            </div>
+
+            <!-- Status -->
+            <div class="form-group mb-3">
+                <label for="status">Status *</label>
+                <select 
+                    id="status"
+                    name="status" 
+                    class="form-control" 
+                    [(ngModel)]="loanForm.status"
+                    required
+                    #status="ngModel">
+                    <option *ngFor="let statusOption of loanStatuses" [value]="statusOption">
+                        {{ statusOption }}
+                    </option>
+                </select>
+                <div *ngIf="status.invalid && status.touched" class="text-danger">
+                    Status is required
+                </div>
+            </div>
+
+            <!-- Action buttons -->
+            <div class="mb-3">
+                <button 
+                    type="submit" 
+                    class="btn btn-success me-2" 
+                    [disabled]="loanForm.invalid || submitting || availableBooks.length === 0">
+                    <span *ngIf="submitting" class="spinner-border spinner-border-sm me-2"></span>
+                    {{ isEditMode ? 'Update Loan' : 'Create Loan' }}
+                </button>
+                <button 
+                    type="button" 
+                    class="btn btn-secondary" 
+                    (click)="cancel()"
+                    [disabled]="submitting">
+                    Cancel
+                </button>
+            </div>
+        </form>
+
+        <!-- Help Text -->
+        <div class="alert alert-info mt-4">
+            <h6>Loan Rules:</h6>
+            <ul class="mb-0">
+                <li>Lender and borrower must be different people</li>
+                <li>Start date must be today or in the future (for new loans)</li>
+                <li>End date must be after start date (if provided)</li>
+                <li>Books must be owned by the selected lender</li>
+                <li>No overlapping loans for the same book</li>
+            </ul>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,92 @@
+<!doctype html>
+<html class="no-js" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="ie=edge" http-equiv="x-ua-compatible">
+    <title>LibroRed</title>
+    <meta content="Share your books" name="description">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <link href="/images/favicon.png" rel="shortcut icon" type="image/png">
+    <!-- Place favicon.ico in the root directory -->
+    <!-- all css here -->
+    <!-- bootstrap v3.3.7 css -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <!-- owl.carousel.2.0.0-beta.2.4 css -->
+    <link href="/css/owl.carousel.min.css" rel="stylesheet">
+    <!-- font-awesome v4.6.3 css -->
+    <link href="/css/font-awesome.min.css" rel="stylesheet">
+    <!-- flaticon.css -->
+    <link href="/css/flaticon.css" rel="stylesheet">
+    <!-- jquery-ui.css -->
+    <link href="/css/jquery-ui.css" rel="stylesheet">
+    <!-- metisMenu.min.css -->
+    <link href="/css/metisMenu.min.css" rel="stylesheet">
+    <!-- swiper.min.css -->
+    <link href="/css/swiper.min.css" rel="stylesheet">
+    <!-- style css -->
+    <link href="/css/styles.css" rel="stylesheet">
+    <!-- responsive css -->
+    <link href="/css/responsive.css" rel="stylesheet">
+    <!-- modernizr css -->
+    <script src="/js/vendor/modernizr-2.8.3.min.js"></script>
+    <!-- Ensure Bootstrap is loaded correctly -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+
+<body>
+<!--Start Preloader-->
+<div class="preloader-wrap">
+    <div class="spinner"></div>
+</div>
+
+<!-- header-area start -->
+<header class="header-area">
+    <div class="header-top bg-2">
+        <div class="fluid-container">
+            <div class="row">
+                <div class="col-md-6 col-12">
+                    <ul class="d-flex header-contact">
+                        <div class="logo">
+                            <a href="/">
+                                <img alt="LibroRed" src="/images/logo.png">
+                            </a>
+                        </div>
+                    </ul>
+                </div>
+                <div class="col-md-6 col-12">
+                    <ul class="d-flex account_login-area">
+
+                        {{^logged}} <!-- If NOT logged in -->
+                        <li><a href="/login">Login</a></li>
+                        <li><a href="/register">Register</a></li>
+                        {{/logged}}
+
+
+                        {{#logged}} <!-- If logged in (Users) -->
+                            {{^admin}}
+                            <li>
+                                <a href="/myaccount">My Account</a>
+                            </li>
+                            {{/admin}}
+                            <li class="nav-item">
+                                <form action="/logout" method="post" class="d-inline">
+                                    <input type="hidden" name="_csrf" value="{{_csrf.token}}">
+                                    <button class="btn btn-primary btn-nowrap" type="submit"
+                                            onclick="document.forms[0].submit();">Log Out
+                                    </button>
+                                </form>
+                            </li>
+                        {{/logged}}
+
+                        {{#admin}} <!-- If the user is an admin -->
+                        <li><a href="/admin">Admin Panel</a></li>
+                        {{/admin}}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<!-- header-area end -->
+<div class="big-container">

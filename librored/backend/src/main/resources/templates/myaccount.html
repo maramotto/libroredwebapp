@@ -1,0 +1,194 @@
+{{> header}}
+
+<div class="container mt-5">
+
+    <h1>Hello {{user.username}}</h1>
+
+    <div class="card p-3 mb-3">
+
+        {{> recommendations}}
+
+    <h2 class="text-center">My Books and Loans</h2>
+
+    <div class="card p-3 mb-3">
+        <!-- Button to Manage Books -->
+        <a href="/books" class="btn btn-primary mt-2">Manage My Books</a>
+    </div>
+
+    <!-- Button to Manage Loans -->
+
+    <div class="card p-3 mb-3">
+        <!-- Button to Manage Books -->
+        <a href="/loans" class="btn btn-primary mt-2">Manage My Loans</a>
+    </div>
+
+    <br>
+
+    <h2 class="text-center">My Account</h2>
+
+    <!-- User Information Panel -->
+    <div class="card p-3 mb-3">
+        <h5>User Information</h5>
+        <p><strong>Username:</strong> <span id="user-username">{{user.username}}</span></p>
+        <p><strong>Email:</strong> <span id="user-email">{{user.email}}</span></p>
+    </div>
+
+    <!-- Alert Messages -->
+    <div id="message-box"></div>
+
+    <!-- Edit Username Form -->
+    <div class="card p-3 mb-3">
+        <h5>Change Username</h5>
+        <form id="edit-username-form">
+            <input type="hidden" id="csrf_token" name="_csrf" value="{{_csrf.token}}">
+            <input type="hidden" id="csrf_header" value="{{_csrf.headerName}}">
+            <label>New Username:</label>
+            <input type="text" id="new-username" class="form-control" required>
+            <button type="button" id="update-username-btn" class="btn btn-primary mt-2">Update Username</button>
+        </form>
+    </div>
+
+    <!-- Change Password Form -->
+    <div class="card p-3">
+        <h5>Change Password</h5>
+        <form id="change-password-form">
+            <input type="hidden" id="csrf_token_password" name="_csrf" value="{{_csrf.token}}">
+            <input type="hidden" id="csrf_header_password" value="{{_csrf.headerName}}">
+
+            <!-- Step 1: Verify Current Password -->
+            <label>Current Password:</label>
+            <input type="password" id="current-password" class="form-control" required>
+            <button type="button" id="verify-password-btn" class="btn btn-warning mt-2">Verify Password</button>
+
+            <!-- Step 2: Enter New Password (Initially Hidden) -->
+            <div id="new-password-section" style="display: none;">
+                <label>New Password:</label>
+                <input type="password" id="new-password" class="form-control" required>
+                <label>Confirm New Password:</label>
+                <input type="password" id="confirm-password" class="form-control" required>
+                <button type="button" id="update-password-btn" class="btn btn-primary mt-2">Update Password</button>
+            </div>
+        </form>
+    </div>
+
+
+</div>
+
+<!-- AJAX Script -->
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        document.getElementById("verify-password-btn").addEventListener("click", verifyCurrentPassword);
+        document.getElementById("update-username-btn").addEventListener("click", updateUsername);
+        document.getElementById("update-password-btn").addEventListener("click", updatePassword);
+    });
+
+    function getCsrfToken() {
+        return document.getElementById("csrf_token").value;
+    }
+
+    function getCsrfHeaderName() {
+        return document.getElementById("csrf_header").value;
+    }
+
+    function updateUsername() {
+        let newUsername = document.getElementById("new-username").value;
+        let csrfHeader = document.getElementById("csrf_header").value;
+        let csrfToken = document.getElementById("csrf_token").value;
+
+        fetch("/api/users/update-username", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded",
+                [csrfHeader]: csrfToken
+            },
+            body: `newUsername=${encodeURIComponent(newUsername)}`
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`Server responded with ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                let messageBox = document.getElementById("message-box");
+                if (data.success) {
+                    messageBox.innerHTML = `<div class="alert alert-success">${data.message}</div>`;
+                    document.getElementById("user-username").innerText = newUsername;
+                } else {
+                    messageBox.innerHTML = `<div class="alert alert-danger">${data.error}</div>`;
+                }
+            })
+            .catch(error => {
+                console.error("🔴 Error in updateUsername:", error);
+                document.getElementById("message-box").innerHTML = `<div class="alert alert-danger">Error updating username.</div>`;
+            });
+    }
+
+
+    function verifyCurrentPassword() {
+        let currentPassword = document.getElementById("current-password").value;
+        let csrfHeader = document.getElementById("csrf_header_password").value;
+        let csrfToken = document.getElementById("csrf_token_password").value;
+
+        fetch("/api/users/verify-password", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded",
+                [csrfHeader]: csrfToken
+            },
+            body: `currentPassword=${encodeURIComponent(currentPassword)}`
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`Server responded with ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                let messageBox = document.getElementById("message-box");
+                if (data.success) {
+                    messageBox.innerHTML = `<div class="alert alert-success">${data.message}</div>`;
+                    document.getElementById("new-password-section").style.display = "block"; // Show new password fields
+                } else {
+                    messageBox.innerHTML = `<div class="alert alert-danger">${data.error}</div>`;
+                }
+            })
+            .catch(error => {
+                console.error("🔴 Error in verifyCurrentPassword:", error);
+                document.getElementById("message-box").innerHTML = `<div class="alert alert-danger">Error verifying password.</div>`;
+            });
+    }
+
+
+    function updatePassword() {
+        let currentPassword = document.getElementById("current-password").value;
+        let newPassword = document.getElementById("new-password").value;
+        let csrfHeader = document.getElementById("csrf_header_password").value;
+        let csrfToken = document.getElementById("csrf_token_password").value;
+
+        fetch("/api/users/update-password", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded",
+                [csrfHeader]: csrfToken
+            },
+            body: `currentPassword=${encodeURIComponent(currentPassword)}&newPassword=${encodeURIComponent(newPassword)}`
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    // Redirect to login page with success message
+                    window.location.href = `/login?successMessage=${encodeURIComponent(data.message)}`;
+                } else {
+                    document.getElementById("message-box").innerHTML = `<div class="alert alert-danger">${data.error}</div>`;
+                }
+            })
+            .catch(error => {
+                console.error("🔴 Error in updatePassword:", error);
+                document.getElementById("message-box").innerHTML = `<div class="alert alert-danger">Error updating password.</div>`;
+            });
+    }
+
+</script>
+
+{{> footer}}
